@@ -1,11 +1,13 @@
 package id.ac.ui.cs.mobileprogramming.roshaniayu.diarypokedex.adapter
 
 import android.content.Context
+import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import id.ac.ui.cs.mobileprogramming.roshaniayu.diarypokedex.R
 import id.ac.ui.cs.mobileprogramming.roshaniayu.diarypokedex.model.Pokemon
 import kotlinx.android.synthetic.main.pokemon_item.view.*
@@ -23,7 +25,8 @@ class PokemonListAdapter(internal var context: Context,
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
-        TODO("Not yet implemented")
+        val itemView = LayoutInflater.from(context).inflate(R.layout.pokemon_item,parent,false)
+        return MyViewHolder(itemView)
     }
 
     override fun getItemCount(): Int {
@@ -31,7 +34,8 @@ class PokemonListAdapter(internal var context: Context,
     }
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
-        TODO("Not yet implemented")
+        Glide.with(context).load(pokemonList[position].img).into(holder.pokemon_image)
+        holder.pokemon_name.text = pokemonList[position].name
     }
 
 }
