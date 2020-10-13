@@ -10,13 +10,14 @@
         android:id="@+id/card_view"
         app:cardCornerRadius="4dp"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content" />
 
         <LinearLayout
             android:padding="16dp"
             android:orientation="vertical"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:background="@drawable/item_shape" >
 
             <ImageView
                 android:id="@+id/pokemon_image"

@@ -1,4 +1,4 @@
-package id.ac.ui.cs.mobileprogramming.roshaniayu.pokediary
+package id.ac.ui.cs.mobileprogramming.roshaniayu.pokediary.ui
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import id.ac.ui.cs.mobileprogramming.roshaniayu.pokediary.R
 import id.ac.ui.cs.mobileprogramming.roshaniayu.pokediary.adapter.PokemonListAdapter
 import id.ac.ui.cs.mobileprogramming.roshaniayu.pokediary.common.Common
 import id.ac.ui.cs.mobileprogramming.roshaniayu.pokediary.common.ItemOffsetDecoration
