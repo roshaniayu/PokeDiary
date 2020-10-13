@@ -104,6 +104,18 @@
                         android:layout_height="40dp" />
 
                     <TextView
+                        android:id="@+id/prev_evolution_empty"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginBottom="10dp"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginLeft="8dp"
+                        android:textStyle="bold"
+                        android:gravity="left"
+                        android:visibility="gone"
+                        android:text="-" />
+
+                    <TextView
                         android:text="Next Evolution"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -116,6 +128,19 @@
                         android:layout_marginBottom="10dp"
                         android:layout_width="match_parent"
                         android:layout_height="40dp" />
+
+                    <TextView
+                        android:id="@+id/next_evolution_empty"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginBottom="10dp"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginLeft="8dp"
+                        android:textStyle="bold"
+                        android:gravity="left"
+                        android:visibility="gone"
+                        android:text="-" />
+
                 </LinearLayout>
 
             </androidx.cardview.widget.CardView>

@@ -5,7 +5,6 @@ import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.localbroadcastmanager.content.LocalBroadcastManager
 import androidx.recyclerview.widget.RecyclerView
 import com.robertlevonyan.views.chip.Chip
@@ -29,10 +28,9 @@ class PokemonEvolutionAdapter(internal var context: Context, var evolutionList: 
     }
 
     inner class MyViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        internal var chip: Chip
+        internal var chip: Chip = itemView.findViewById(R.id.chip) as Chip
 
         init {
-            chip = itemView.findViewById(R.id.chip) as  Chip
             chip.setOnChipClickListener {
                 LocalBroadcastManager.getInstance(context).sendBroadcast(Intent(Common.KEY_NUM_EVOLUTION).putExtra("num", evolutionList[adapterPosition].num))
             }

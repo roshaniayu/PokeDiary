@@ -6,8 +6,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
-import android.widget.LinearLayout
 import android.widget.TextView
+import androidx.core.view.isVisible
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
@@ -25,10 +25,12 @@ import kotlinx.android.synthetic.main.activity_main.*
  * create an instance of this fragment.
  */
 class PokemonDetailFragment : Fragment() {
-    internal lateinit var pokemonImage: ImageView
-    internal lateinit var pokemonName: TextView
-    internal lateinit var pokemonHeight: TextView
-    internal lateinit var pokemonWeight: TextView
+    private lateinit var pokemonImage: ImageView
+    private lateinit var pokemonName: TextView
+    private lateinit var pokemonHeight: TextView
+    private lateinit var pokemonWeight: TextView
+    private lateinit var prevEmptyView: TextView
+    private lateinit var nextEmptyView: TextView
     lateinit var recyclerType: RecyclerView
     lateinit var recyclerWeakness: RecyclerView
     lateinit var recyclerPrevEvolution : RecyclerView
@@ -51,6 +53,8 @@ class PokemonDetailFragment : Fragment() {
         pokemonName = itemView.findViewById(R.id.name)
         pokemonHeight = itemView.findViewById(R.id.height)
         pokemonWeight = itemView.findViewById(R.id.weight)
+        prevEmptyView = itemView.findViewById(R.id.prev_evolution_empty)
+        nextEmptyView = itemView.findViewById(R.id.next_evolution_empty)
 
         recyclerType = itemView.findViewById(R.id.type_recyclerview)
         recyclerType.setHasFixedSize(true)
@@ -74,7 +78,7 @@ class PokemonDetailFragment : Fragment() {
     }
 
     private fun setDetailPokemon(pokemon: Pokemon) {
-        //Load image
+        // Load image
         Glide.with(activity!!).load(pokemon.img).into(pokemonImage)
 
         pokemonName.text = pokemon.name
@@ -90,16 +94,22 @@ class PokemonDetailFragment : Fragment() {
         if (pokemon.prev_evolution != null) {
             val prevEvolutionAdapterAdapter = PokemonEvolutionAdapter(activity!!, pokemon.prev_evolution!!)
             recyclerPrevEvolution.adapter = prevEvolutionAdapterAdapter
+        } else {
+            prevEmptyView.visibility = View.VISIBLE
+            recyclerPrevEvolution.visibility = View.GONE
         }
 
         if (pokemon.next_evolution != null) {
             val nextEvolutionAdapter = PokemonEvolutionAdapter(activity!!, pokemon.next_evolution!!)
             recyclerNextEvolution.adapter = nextEvolutionAdapter
+        } else {
+            nextEmptyView.visibility = View.VISIBLE
+            recyclerNextEvolution.visibility = View.GONE
         }
     }
 
     companion object {
-        internal var instance: PokemonDetailFragment?=null
+        private var instance: PokemonDetailFragment?=null
 
         fun getInstance() : PokemonDetailFragment {
             if (instance == null) {
