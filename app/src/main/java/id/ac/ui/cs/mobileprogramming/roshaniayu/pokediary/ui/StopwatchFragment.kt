@@ -18,7 +18,7 @@ class StopwatchFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         val itemView = inflater.inflate(R.layout.fragment_stopwatch, container, false)
-        (activity as MainActivity).toolbar.title = getString(R.string.app_name)
+        (activity as MainActivity).toolbar.title = getString(R.string.timer_name)
 
         val stopwatch = itemView.findViewById<TextView>(R.id.stopwatch)
         val startButton = itemView.findViewById<Button>(R.id.start_stopwatch)

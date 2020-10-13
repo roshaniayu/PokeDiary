@@ -4,13 +4,13 @@ import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
 import android.content.IntentFilter
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import android.os.SystemClock
 import android.view.MenuItem
 import android.widget.TextView
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.localbroadcastmanager.content.LocalBroadcastManager
@@ -19,7 +19,6 @@ import id.ac.ui.cs.mobileprogramming.roshaniayu.pokediary.common.Common
 import id.ac.ui.cs.mobileprogramming.roshaniayu.pokediary.ui.PokemonDetailFragment
 import id.ac.ui.cs.mobileprogramming.roshaniayu.pokediary.ui.PokemonListFragment
 import id.ac.ui.cs.mobileprogramming.roshaniayu.pokediary.ui.StopwatchFragment
-import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
     var stopwatchIsRunning: Boolean = false
@@ -52,10 +51,6 @@ class MainActivity : AppCompatActivity() {
                 fragmentTransaction.replace(R.id.fragment_container, detailFragment)
                 fragmentTransaction.addToBackStack("detail_pokemon")
                 fragmentTransaction.commit()
-
-                // Set pokemon name to toolbar
-                val pokemon = Common.pokemonList[position]
-                toolbar.title = pokemon.name
             }
         }
 
@@ -97,16 +92,12 @@ class MainActivity : AppCompatActivity() {
         }
 
         supportFragmentManager.beginTransaction().replace(R.id.fragment_container,
-            PokemonListFragment()
-        )
-            .commit()
+            PokemonListFragment()).commit()
     }
 
 //    override fun onOptionsItemSelected(item: MenuItem): Boolean {
 //        when (item.itemId) {
 //            android.R.id.home -> {
-//                toolbar.title = getString(R.string.app_name)
-//
 //                // Clear all fragment in stack with name 'detail_pokemon'
 //                supportFragmentManager.popBackStack("detail_pokemon", FragmentManager.POP_BACK_STACK_INCLUSIVE)
 //

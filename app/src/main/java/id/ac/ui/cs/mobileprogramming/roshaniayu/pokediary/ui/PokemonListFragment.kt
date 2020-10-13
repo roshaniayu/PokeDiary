@@ -40,7 +40,7 @@ class PokemonListFragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         val itemView = inflater.inflate(R.layout.fragment_pokemon_list, container, false)
-        (activity as MainActivity).toolbar.title = getString(R.string.app_name)
+        (activity as MainActivity).toolbar.title = getString(R.string.dictionary_name)
 
         recyclerView = itemView.findViewById(R.id.pokemon_recyclerview) as RecyclerView
         recyclerView.setHasFixedSize(true)
