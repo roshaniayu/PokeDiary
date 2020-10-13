@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import id.ac.ui.cs.mobileprogramming.roshaniayu.pokediary.MainActivity
 import id.ac.ui.cs.mobileprogramming.roshaniayu.pokediary.R
 import id.ac.ui.cs.mobileprogramming.roshaniayu.pokediary.adapter.PokemonListAdapter
 import id.ac.ui.cs.mobileprogramming.roshaniayu.pokediary.common.Common
@@ -16,6 +17,7 @@ import id.ac.ui.cs.mobileprogramming.roshaniayu.pokediary.network.PokedexService
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
+import kotlinx.android.synthetic.main.activity_main.*
 
 /**
  * A simple [Fragment] subclass.
@@ -37,7 +39,8 @@ class PokemonListFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        val itemView = inflater.inflate(R.layout.pokemon_list, container, false)
+        val itemView = inflater.inflate(R.layout.fragment_pokemon_list, container, false)
+        (activity as MainActivity).toolbar.title = getString(R.string.app_name)
 
         recyclerView = itemView.findViewById(R.id.pokemon_recyclerview) as RecyclerView
         recyclerView.setHasFixedSize(true)

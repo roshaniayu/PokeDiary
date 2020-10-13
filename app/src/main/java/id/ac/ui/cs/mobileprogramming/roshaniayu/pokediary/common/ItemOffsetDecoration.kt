@@ -17,6 +17,6 @@ class ItemOffsetDecoration(private val itemOffset: Int) : RecyclerView.ItemDecor
         state: RecyclerView.State
     ) {
         super.getItemOffsets(outRect, view, parent, state)
-        outRect!!.set(itemOffset,itemOffset,itemOffset,itemOffset)
+        outRect.set(itemOffset,itemOffset,itemOffset,itemOffset)
     }
 }

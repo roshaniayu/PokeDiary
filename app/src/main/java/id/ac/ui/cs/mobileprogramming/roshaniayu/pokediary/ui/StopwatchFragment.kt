@@ -9,6 +9,7 @@ import android.widget.TextView
 import androidx.fragment.app.Fragment
 import id.ac.ui.cs.mobileprogramming.roshaniayu.pokediary.MainActivity
 import id.ac.ui.cs.mobileprogramming.roshaniayu.pokediary.R
+import kotlinx.android.synthetic.main.activity_main.*
 
 class StopwatchFragment : Fragment() {
     override fun onCreateView(
@@ -16,11 +17,13 @@ class StopwatchFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val view: View = inflater.inflate(R.layout.stopwatch, container, false)
-        val stopwatch = view.findViewById<TextView>(R.id.stopwatch)
-        val startButton = view.findViewById<Button>(R.id.start_stopwatch)
-        val pauseButton = view.findViewById<Button>(R.id.pause_stopwatch)
-        val resetButton = view.findViewById<Button>(R.id.reset_stopwatch)
+        val itemView = inflater.inflate(R.layout.fragment_stopwatch, container, false)
+        (activity as MainActivity).toolbar.title = getString(R.string.app_name)
+
+        val stopwatch = itemView.findViewById<TextView>(R.id.stopwatch)
+        val startButton = itemView.findViewById<Button>(R.id.start_stopwatch)
+        val pauseButton = itemView.findViewById<Button>(R.id.pause_stopwatch)
+        val resetButton = itemView.findViewById<Button>(R.id.reset_stopwatch)
 
         if ((activity as MainActivity).stopwatchIsRunning) {
             startButton.isEnabled = false
@@ -43,6 +46,6 @@ class StopwatchFragment : Fragment() {
             stopwatch.text = "00:00:00"
         }
 
-        return view
+        return itemView
     }
 }
