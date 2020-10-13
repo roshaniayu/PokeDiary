@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import id.ac.ui.cs.mobileprogramming.roshaniayu.pokediary.MainActivity
 import id.ac.ui.cs.mobileprogramming.roshaniayu.pokediary.R
+import id.ac.ui.cs.mobileprogramming.roshaniayu.pokediary.adapter.PokemonEvolutionAdapter
 import id.ac.ui.cs.mobileprogramming.roshaniayu.pokediary.adapter.PokemonTypeAdapter
 import id.ac.ui.cs.mobileprogramming.roshaniayu.pokediary.common.Common
 import id.ac.ui.cs.mobileprogramming.roshaniayu.pokediary.model.Pokemon
@@ -85,6 +86,16 @@ class PokemonDetailFragment : Fragment() {
 
         val weaknessAdapter = PokemonTypeAdapter(activity!!, pokemon.weaknesses!!)
         recyclerWeakness.adapter = weaknessAdapter
+
+        if (pokemon.prev_evolution != null) {
+            val prevEvolutionAdapterAdapter = PokemonEvolutionAdapter(activity!!, pokemon.prev_evolution!!)
+            recyclerPrevEvolution.adapter = prevEvolutionAdapterAdapter
+        }
+
+        if (pokemon.next_evolution != null) {
+            val nextEvolutionAdapter = PokemonEvolutionAdapter(activity!!, pokemon.next_evolution!!)
+            recyclerNextEvolution.adapter = nextEvolutionAdapter
+        }
     }
 
     companion object {

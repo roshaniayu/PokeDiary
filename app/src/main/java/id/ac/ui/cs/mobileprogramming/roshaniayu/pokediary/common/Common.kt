@@ -6,6 +6,7 @@ import id.ac.ui.cs.mobileprogramming.roshaniayu.pokediary.model.Pokemon
 object Common {
     var pokemonList: List<Pokemon> = ArrayList()
     const val KEY_ENABLE_HOME = "position"
+    const val KEY_NUM_EVOLUTION = "evolution"
 
     fun findPokemonByNum(num: String): Pokemon? {
         for (pokemon in Common.pokemonList)

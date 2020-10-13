@@ -53,7 +53,28 @@ class MainActivity : AppCompatActivity() {
                 fragmentTransaction.commit()
             }
         }
+    }
 
+    private val showEvolution = object : BroadcastReceiver() {
+        override fun onReceive(context: Context?, intent: Intent?) {
+            if (intent?.action.toString() == Common.KEY_NUM_EVOLUTION) {
+//                supportActionBar?.setDisplayHomeAsUpEnabled(true)
+//                supportActionBar?.setDisplayShowHomeEnabled(true)
+
+                // Replace fragment
+                val detailFragment = PokemonDetailFragment.getInstance()
+                val num = intent?.getStringExtra("num")
+                val bundle = Bundle()
+                bundle.putString("num", num)
+                detailFragment.arguments = bundle
+
+                val fragmentTransaction = supportFragmentManager.beginTransaction()
+                fragmentTransaction.remove(detailFragment) // Remove current
+                fragmentTransaction.replace(R.id.fragment_container, detailFragment)
+                fragmentTransaction.addToBackStack("detail_pokemon")
+                fragmentTransaction.commit()
+            }
+        }
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -75,6 +96,8 @@ class MainActivity : AppCompatActivity() {
 
         // Register broadcast
         LocalBroadcastManager.getInstance(this).registerReceiver(showDetail, IntentFilter(Common.KEY_ENABLE_HOME))
+        LocalBroadcastManager.getInstance(this).registerReceiver(showEvolution, IntentFilter(Common.KEY_NUM_EVOLUTION))
+
 
         val bottomNav: BottomNavigationView = findViewById(R.id.bottom_navigation)
         bottomNav.setOnNavigationItemSelectedListener { item ->

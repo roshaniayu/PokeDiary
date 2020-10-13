@@ -26,11 +26,6 @@ class PokemonTypeAdapter(internal var context: Context, internal var typeList: L
     }
 
     inner class MyViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        internal var chip: Chip
-
-        init {
-            chip = itemView.findViewById(R.id.chip) as  Chip
-            chip.setOnChipClickListener { view -> Toast.makeText(context, "Clicked", Toast.LENGTH_SHORT).show() }
-        }
+        internal var chip: Chip = itemView.findViewById(R.id.chip) as Chip
     }
 }
