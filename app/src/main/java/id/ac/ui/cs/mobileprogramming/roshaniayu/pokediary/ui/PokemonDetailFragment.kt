@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import id.ac.ui.cs.mobileprogramming.roshaniayu.pokediary.MainActivity
 import id.ac.ui.cs.mobileprogramming.roshaniayu.pokediary.R
+import id.ac.ui.cs.mobileprogramming.roshaniayu.pokediary.adapter.PokemonTypeAdapter
 import id.ac.ui.cs.mobileprogramming.roshaniayu.pokediary.common.Common
 import id.ac.ui.cs.mobileprogramming.roshaniayu.pokediary.model.Pokemon
 import kotlinx.android.synthetic.main.activity_main.*
@@ -78,6 +79,12 @@ class PokemonDetailFragment : Fragment() {
         pokemonName.text = pokemon.name
         pokemonHeight.text = "Height: " + pokemon.height
         pokemonWeight.text = "Weight: " + pokemon.weight
+
+        val typeAdapter = PokemonTypeAdapter(activity!!, pokemon.type!!)
+        recyclerType.adapter = typeAdapter
+
+        val weaknessAdapter = PokemonTypeAdapter(activity!!, pokemon.weaknesses!!)
+        recyclerWeakness.adapter = weaknessAdapter
     }
 
     companion object {
