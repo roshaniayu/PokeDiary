@@ -19,10 +19,10 @@ import io.reactivex.schedulers.Schedulers
 
 /**
  * A simple [Fragment] subclass.
- * Use the [PokemonList.newInstance] factory method to
+ * Use the [PokemonListFragment.newInstance] factory method to
  * create an instance of this fragment.
  */
-class PokemonList : Fragment() {
+class PokemonListFragment : Fragment() {
     internal lateinit var recyclerView: RecyclerView
     internal var compositeDisposable = CompositeDisposable()
     internal var pokedexService: PokedexService
