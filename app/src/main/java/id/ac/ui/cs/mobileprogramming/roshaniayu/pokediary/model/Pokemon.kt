@@ -1,4 +1,4 @@
-package id.ac.ui.cs.mobileprogramming.roshaniayu.diarypokedex.model
+package id.ac.ui.cs.mobileprogramming.roshaniayu.pokediary.model
 
 class Pokemon {
     var id = 0

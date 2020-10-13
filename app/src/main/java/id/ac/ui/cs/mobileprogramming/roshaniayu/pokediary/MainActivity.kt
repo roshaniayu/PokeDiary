@@ -1,4 +1,4 @@
-package id.ac.ui.cs.mobileprogramming.roshaniayu.diarypokedex
+package id.ac.ui.cs.mobileprogramming.roshaniayu.pokediary
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle

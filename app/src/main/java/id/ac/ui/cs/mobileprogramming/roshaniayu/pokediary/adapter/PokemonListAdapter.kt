@@ -1,4 +1,4 @@
-package id.ac.ui.cs.mobileprogramming.roshaniayu.diarypokedex.adapter
+package id.ac.ui.cs.mobileprogramming.roshaniayu.pokediary.adapter
 
 import android.content.Context
 import android.view.LayoutInflater
@@ -8,12 +8,11 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import id.ac.ui.cs.mobileprogramming.roshaniayu.diarypokedex.R
-import id.ac.ui.cs.mobileprogramming.roshaniayu.diarypokedex.model.Pokemon
-import kotlinx.android.synthetic.main.pokemon_item.view.*
+import id.ac.ui.cs.mobileprogramming.roshaniayu.pokediary.R
+import id.ac.ui.cs.mobileprogramming.roshaniayu.pokediary.model.Pokemon
 
-class PokemonListAdapter(internal var context: Context,
-                         internal var pokemonList: List<Pokemon>): RecyclerView.Adapter<PokemonListAdapter.MyViewHolder>() {
+class PokemonListAdapter(internal var context: Context, internal var pokemonList: List<Pokemon>)
+    : RecyclerView.Adapter<PokemonListAdapter.MyViewHolder>() {
 
     inner class MyViewHolder(itemView: View):RecyclerView.ViewHolder(itemView) {
         internal var pokemon_image: ImageView
