@@ -25,9 +25,9 @@ import kotlinx.android.synthetic.main.activity_main.*
  * create an instance of this fragment.
  */
 class PokemonListFragment : Fragment() {
-    internal lateinit var recyclerView: RecyclerView
-    internal var compositeDisposable = CompositeDisposable()
-    internal var pokedexService: PokedexService
+    private lateinit var recyclerView: RecyclerView
+    private var compositeDisposable = CompositeDisposable()
+    private var pokedexService: PokedexService
 
     init {
         val retrofit = PokedexClient.instance

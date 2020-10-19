@@ -16,6 +16,7 @@ import androidx.fragment.app.FragmentManager
 import androidx.localbroadcastmanager.content.LocalBroadcastManager
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import id.ac.ui.cs.mobileprogramming.roshaniayu.pokediary.common.Common
+import id.ac.ui.cs.mobileprogramming.roshaniayu.pokediary.ui.PokemonBoxFragment
 import id.ac.ui.cs.mobileprogramming.roshaniayu.pokediary.ui.PokemonDetailFragment
 import id.ac.ui.cs.mobileprogramming.roshaniayu.pokediary.ui.PokemonListFragment
 import id.ac.ui.cs.mobileprogramming.roshaniayu.pokediary.ui.StopwatchFragment
@@ -101,10 +102,11 @@ class MainActivity : AppCompatActivity() {
 
         val bottomNav: BottomNavigationView = findViewById(R.id.bottom_navigation)
         bottomNav.setOnNavigationItemSelectedListener { item ->
-            var selectedFragment: Fragment = PokemonListFragment()
+            var selectedFragment: Fragment = PokemonBoxFragment()
 
             when (item.itemId) {
-                R.id.nav_home -> selectedFragment = PokemonListFragment()
+                R.id.nav_home -> selectedFragment = PokemonBoxFragment()
+                R.id.nav_explore -> selectedFragment = PokemonListFragment()
                 R.id.nav_stopwatch -> selectedFragment = StopwatchFragment()
             }
 
@@ -115,7 +117,7 @@ class MainActivity : AppCompatActivity() {
         }
 
         supportFragmentManager.beginTransaction().replace(R.id.fragment_container,
-            PokemonListFragment()).commit()
+            PokemonBoxFragment()).commit()
     }
 
 //    override fun onOptionsItemSelected(item: MenuItem): Boolean {

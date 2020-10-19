@@ -5,9 +5,11 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
-import androidx.core.view.isVisible
+import android.widget.Toast
+import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
@@ -16,8 +18,12 @@ import id.ac.ui.cs.mobileprogramming.roshaniayu.pokediary.R
 import id.ac.ui.cs.mobileprogramming.roshaniayu.pokediary.adapter.PokemonEvolutionAdapter
 import id.ac.ui.cs.mobileprogramming.roshaniayu.pokediary.adapter.PokemonTypeAdapter
 import id.ac.ui.cs.mobileprogramming.roshaniayu.pokediary.common.Common
+import id.ac.ui.cs.mobileprogramming.roshaniayu.pokediary.database.PokemonEntity
 import id.ac.ui.cs.mobileprogramming.roshaniayu.pokediary.model.Pokemon
+import id.ac.ui.cs.mobileprogramming.roshaniayu.pokediary.ui.viewmodel.PokemonViewModel
+import id.ac.ui.cs.mobileprogramming.roshaniayu.pokediary.utils.InjectorUtils
 import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.coroutines.ObsoleteCoroutinesApi
 
 /**
  * A simple [Fragment] subclass.
@@ -31,6 +37,9 @@ class PokemonDetailFragment : Fragment() {
     private lateinit var pokemonWeight: TextView
     private lateinit var prevEmptyView: TextView
     private lateinit var nextEmptyView: TextView
+    private lateinit var catchPokemonButton: Button
+    private lateinit var itemView: View
+    private lateinit var viewModel: PokemonViewModel
     lateinit var recyclerType: RecyclerView
     lateinit var recyclerWeakness: RecyclerView
     lateinit var recyclerPrevEvolution : RecyclerView
@@ -41,7 +50,10 @@ class PokemonDetailFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        val itemView = inflater.inflate(R.layout.fragment_pokemon_detail, container, false)
+        itemView = inflater.inflate(R.layout.fragment_pokemon_detail, container, false)
+        val factory = InjectorUtils.providePokemonViewModelFactory(itemView.context)
+        viewModel = ViewModelProviders.of(this, factory).get(PokemonViewModel::class.java)
+
         (activity as MainActivity).toolbar.title = getString(R.string.detail_name)
         val pokemon: Pokemon? = if (arguments?.getString("num") == null) {
             Common.pokemonList[arguments?.getInt("position")!!]
@@ -55,6 +67,7 @@ class PokemonDetailFragment : Fragment() {
         pokemonWeight = itemView.findViewById(R.id.weight)
         prevEmptyView = itemView.findViewById(R.id.prev_evolution_empty)
         nextEmptyView = itemView.findViewById(R.id.next_evolution_empty)
+        catchPokemonButton = itemView.findViewById(R.id.catch_pokemon)
 
         recyclerType = itemView.findViewById(R.id.type_recyclerview)
         recyclerType.setHasFixedSize(true)
@@ -77,6 +90,7 @@ class PokemonDetailFragment : Fragment() {
         return itemView
     }
 
+    @ObsoleteCoroutinesApi
     private fun setDetailPokemon(pokemon: Pokemon) {
         // Load image
         Glide.with(activity!!).load(pokemon.img).into(pokemonImage)
@@ -105,6 +119,14 @@ class PokemonDetailFragment : Fragment() {
         } else {
             nextEmptyView.visibility = View.VISIBLE
             recyclerNextEvolution.visibility = View.GONE
+        }
+
+        // Catch pokemon
+        catchPokemonButton.setOnClickListener {
+            val caughtPokemon = PokemonEntity(pokemon.id, pokemon.num, pokemon.name, pokemon.img, pokemon.height, pokemon.weight)
+            viewModel.catchPokemon(caughtPokemon)
+
+            Toast.makeText(itemView.context, "Pokemon Caught", Toast.LENGTH_SHORT).show()
         }
     }
 

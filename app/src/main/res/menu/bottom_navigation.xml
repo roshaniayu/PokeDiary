@@ -3,9 +3,13 @@
     <item
         android:id="@+id/nav_home"
         android:icon="@drawable/ic_baseline_home_24"
-        android:title="Home" />
+        android:title="PokéDiary" />
+    <item
+        android:id="@+id/nav_explore"
+        android:icon="@drawable/ic_baseline_explore_24"
+        android:title="PokéXplore" />
     <item
         android:id="@+id/nav_stopwatch"
         android:icon="@drawable/ic_baseline_timer_24"
-        android:title="Stopwatch" />
+        android:title="PokéWatch" />
 </menu>

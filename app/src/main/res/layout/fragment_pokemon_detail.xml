@@ -141,6 +141,12 @@
                         android:visibility="gone"
                         android:text="-" />
 
+                    <Button
+                        android:id="@+id/catch_pokemon"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Catch" />
+
                 </LinearLayout>
 
             </androidx.cardview.widget.CardView>

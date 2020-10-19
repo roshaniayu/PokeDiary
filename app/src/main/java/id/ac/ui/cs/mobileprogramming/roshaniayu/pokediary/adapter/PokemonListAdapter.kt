@@ -20,6 +20,7 @@ class PokemonListAdapter(internal var context: Context, internal var pokemonList
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
         val itemView = LayoutInflater.from(context).inflate(R.layout.fragment_pokemon_item,parent,false)
+
         return MyViewHolder(itemView)
     }
 
@@ -42,7 +43,7 @@ class PokemonListAdapter(internal var context: Context, internal var pokemonList
     inner class MyViewHolder(itemView: View):RecyclerView.ViewHolder(itemView) {
         internal var pokemon_image: ImageView
         internal var pokemon_name: TextView
-        internal var itemClickListener: ItemClickListener?=null
+        internal var itemClickListener: ItemClickListener? = null
 
         fun setItemClickListener(itemClickListener: ItemClickListener) {
             this.itemClickListener = itemClickListener
