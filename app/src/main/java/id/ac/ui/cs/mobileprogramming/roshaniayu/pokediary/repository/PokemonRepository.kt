@@ -1,13 +1,11 @@
 package id.ac.ui.cs.mobileprogramming.roshaniayu.pokediary.repository
 
 import androidx.lifecycle.LiveData
-import id.ac.ui.cs.mobileprogramming.roshaniayu.pokediary.database.PokemonDao
-import id.ac.ui.cs.mobileprogramming.roshaniayu.pokediary.database.PokemonEntity
+import id.ac.ui.cs.mobileprogramming.roshaniayu.pokediary.database.dao.PokemonDao
+import id.ac.ui.cs.mobileprogramming.roshaniayu.pokediary.database.entity.PokemonEntity
 import kotlinx.coroutines.*
 
-class PokemonRepository private constructor(
-    private val pokemonDao: PokemonDao
-) {
+class PokemonRepository private constructor(private val pokemonDao: PokemonDao) {
     private val allPokemon: LiveData<List<PokemonEntity>> = pokemonDao.getAll()
 
     @ObsoleteCoroutinesApi
@@ -23,13 +21,13 @@ class PokemonRepository private constructor(
     }
 
     @ObsoleteCoroutinesApi
-    fun updatePokemon(contacts: PokemonEntity) = GlobalScope.launch(thread) {
-        pokemonDao.update(contacts)
+    fun updatePokemon(pokemon: PokemonEntity) = GlobalScope.launch(thread) {
+        pokemonDao.update(pokemon)
     }
 
     @ObsoleteCoroutinesApi
-    fun deletePokemon(contacts: PokemonEntity) = GlobalScope.launch(thread) {
-        pokemonDao.delete(contacts)
+    fun deletePokemon(pokemon: PokemonEntity) = GlobalScope.launch(thread) {
+        pokemonDao.delete(pokemon)
     }
 
     companion object {

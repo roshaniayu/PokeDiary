@@ -8,15 +8,14 @@ import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import android.os.SystemClock
-import android.view.MenuItem
+import android.view.inputmethod.InputMethodManager
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentManager
 import androidx.localbroadcastmanager.content.LocalBroadcastManager
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import id.ac.ui.cs.mobileprogramming.roshaniayu.pokediary.common.Common
-import id.ac.ui.cs.mobileprogramming.roshaniayu.pokediary.ui.PokemonBoxFragment
+import id.ac.ui.cs.mobileprogramming.roshaniayu.pokediary.ui.PokemonDiaryFragment
 import id.ac.ui.cs.mobileprogramming.roshaniayu.pokediary.ui.PokemonDetailFragment
 import id.ac.ui.cs.mobileprogramming.roshaniayu.pokediary.ui.PokemonListFragment
 import id.ac.ui.cs.mobileprogramming.roshaniayu.pokediary.ui.StopwatchFragment
@@ -102,10 +101,10 @@ class MainActivity : AppCompatActivity() {
 
         val bottomNav: BottomNavigationView = findViewById(R.id.bottom_navigation)
         bottomNav.setOnNavigationItemSelectedListener { item ->
-            var selectedFragment: Fragment = PokemonBoxFragment()
+            var selectedFragment: Fragment = PokemonDiaryFragment()
 
             when (item.itemId) {
-                R.id.nav_home -> selectedFragment = PokemonBoxFragment()
+                R.id.nav_home -> selectedFragment = PokemonDiaryFragment()
                 R.id.nav_explore -> selectedFragment = PokemonListFragment()
                 R.id.nav_stopwatch -> selectedFragment = StopwatchFragment()
             }
@@ -117,7 +116,7 @@ class MainActivity : AppCompatActivity() {
         }
 
         supportFragmentManager.beginTransaction().replace(R.id.fragment_container,
-            PokemonBoxFragment()).commit()
+            PokemonDiaryFragment()).commit()
     }
 
 //    override fun onOptionsItemSelected(item: MenuItem): Boolean {
@@ -133,6 +132,11 @@ class MainActivity : AppCompatActivity() {
 //
 //        return true
 //    }
+
+    fun hideKeyboard() {
+        val inputManager: InputMethodManager = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+        inputManager.hideSoftInputFromWindow(currentFocus?.windowToken, InputMethodManager.SHOW_FORCED)
+    }
 
     fun startStopwatch() {
         startTime = SystemClock.uptimeMillis()

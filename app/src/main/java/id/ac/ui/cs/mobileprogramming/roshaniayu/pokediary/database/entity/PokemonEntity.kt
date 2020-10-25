@@ -1,10 +1,10 @@
-package id.ac.ui.cs.mobileprogramming.roshaniayu.pokediary.database
+package id.ac.ui.cs.mobileprogramming.roshaniayu.pokediary.database.entity
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 
-@Entity(tableName = "pokeball")
+@Entity(tableName = "pokemon")
 data class PokemonEntity (
     @PrimaryKey var id: Int = 0,
     @ColumnInfo(name = "num") var num: String?,

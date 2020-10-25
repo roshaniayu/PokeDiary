@@ -18,7 +18,7 @@ import id.ac.ui.cs.mobileprogramming.roshaniayu.pokediary.R
 import id.ac.ui.cs.mobileprogramming.roshaniayu.pokediary.adapter.PokemonEvolutionAdapter
 import id.ac.ui.cs.mobileprogramming.roshaniayu.pokediary.adapter.PokemonTypeAdapter
 import id.ac.ui.cs.mobileprogramming.roshaniayu.pokediary.common.Common
-import id.ac.ui.cs.mobileprogramming.roshaniayu.pokediary.database.PokemonEntity
+import id.ac.ui.cs.mobileprogramming.roshaniayu.pokediary.database.entity.PokemonEntity
 import id.ac.ui.cs.mobileprogramming.roshaniayu.pokediary.model.Pokemon
 import id.ac.ui.cs.mobileprogramming.roshaniayu.pokediary.ui.viewmodel.PokemonViewModel
 import id.ac.ui.cs.mobileprogramming.roshaniayu.pokediary.utils.InjectorUtils
@@ -123,7 +123,15 @@ class PokemonDetailFragment : Fragment() {
 
         // Catch pokemon
         catchPokemonButton.setOnClickListener {
-            val caughtPokemon = PokemonEntity(pokemon.id, pokemon.num, pokemon.name, pokemon.img, pokemon.height, pokemon.weight)
+            val caughtPokemon =
+                PokemonEntity(
+                    pokemon.id,
+                    pokemon.num,
+                    pokemon.name,
+                    pokemon.img,
+                    pokemon.height,
+                    pokemon.weight
+                )
             viewModel.catchPokemon(caughtPokemon)
 
             Toast.makeText(itemView.context, "Pokemon Caught", Toast.LENGTH_SHORT).show()

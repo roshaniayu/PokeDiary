@@ -4,23 +4,23 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
-import id.ac.ui.cs.mobileprogramming.roshaniayu.pokediary.database.dao.PokemonDao
-import id.ac.ui.cs.mobileprogramming.roshaniayu.pokediary.database.entity.PokemonEntity
+import id.ac.ui.cs.mobileprogramming.roshaniayu.pokediary.database.dao.DiaryDao
+import id.ac.ui.cs.mobileprogramming.roshaniayu.pokediary.database.entity.DiaryEntity
 
-@Database(entities = [PokemonEntity::class], version = 2, exportSchema = false)
-abstract class PokemonDatabase : RoomDatabase() {
+@Database(entities = [DiaryEntity::class], version = 2, exportSchema = false)
+abstract class DiaryDatabase : RoomDatabase() {
 
-    abstract fun pokemonDao(): PokemonDao
+    abstract fun diaryDao(): DiaryDao
 
     companion object {
         @Volatile
-        private var instance: PokemonDatabase? = null
+        private var instance: DiaryDatabase? = null
 
         fun getInstance(context: Context) = instance ?: synchronized(this) {
             instance ?: Room.databaseBuilder(
                 context.applicationContext,
-                PokemonDatabase::class.java,
-                "pokemon-database"
+                DiaryDatabase::class.java,
+                "diary-database"
             )
                 .fallbackToDestructiveMigration()
                 .build()
