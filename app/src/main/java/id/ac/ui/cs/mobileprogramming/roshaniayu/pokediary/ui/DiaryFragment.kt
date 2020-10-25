@@ -7,13 +7,15 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
-import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import id.ac.ui.cs.mobileprogramming.roshaniayu.pokediary.MainActivity
 import id.ac.ui.cs.mobileprogramming.roshaniayu.pokediary.R
+import id.ac.ui.cs.mobileprogramming.roshaniayu.pokediary.adapter.DiaryAdapter
 import id.ac.ui.cs.mobileprogramming.roshaniayu.pokediary.database.entity.DiaryEntity
 import id.ac.ui.cs.mobileprogramming.roshaniayu.pokediary.ui.viewmodel.DiaryViewModel
 import id.ac.ui.cs.mobileprogramming.roshaniayu.pokediary.utils.InjectorUtils
@@ -29,7 +31,7 @@ import java.util.*
 class DiaryFragment : Fragment() {
     private lateinit var itemView: View
     private lateinit var viewModel: DiaryViewModel
-//    private lateinit var diaryRecyclerView: RecyclerView
+    private lateinit var diaryRecyclerView: RecyclerView
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -42,7 +44,7 @@ class DiaryFragment : Fragment() {
         viewModel = ViewModelProviders.of(this, factory).get(DiaryViewModel::class.java)
 
         (activity as MainActivity).toolbar.title = getString(R.string.app_name)
-//        diaryRecyclerView = itemView.findViewById(R.id.diary_recyclerview)
+        diaryRecyclerView = itemView.findViewById(R.id.diary_recyclerview)
         val diaryInput: EditText = itemView.findViewById(R.id.text_diary)
         val inputButton: Button = itemView.findViewById(R.id.input_button)
 
@@ -69,37 +71,20 @@ class DiaryFragment : Fragment() {
             diaryInput.setText("")
         }
 
-        initializeUi()
-//        showPokeBoxRecyclerList()
+        showDiaryRecyclerList()
 
         return itemView
     }
 
-//    private fun showPokeBoxRecyclerList() {
-//        pokeboxRecyclerView.layoutManager = LinearLayoutManager(itemView.context)
-//        pokeboxRecyclerView.setHasFixedSize(true)
-//
-//        val adapter = PokemonBoxAdapter(activity!!)
-//        pokeboxRecyclerView.adapter = adapter
-//
-//        viewModel.getAllPokemon().observe(this, Observer { pokemon ->
-//            adapter.setPokemon(pokemon)
-//        })
-//    }
+    private fun showDiaryRecyclerList() {
+        diaryRecyclerView.layoutManager = LinearLayoutManager(itemView.context)
+        diaryRecyclerView.setHasFixedSize(true)
 
-    private fun initializeUi() {
-        viewModel.getAllDiary().observe(this, Observer { diaryInput ->
-            val stringBuilder = StringBuilder()
-            if (diaryInput.isNotEmpty()) {
-                diaryInput.forEach { diary ->
-                    stringBuilder.append("${diary.date}\n\n")
-                }
-            } else {
-                stringBuilder.append("There's no input yet")
-            }
+        val adapter = DiaryAdapter(activity!!)
+        diaryRecyclerView.adapter = adapter
 
-            val testView: TextView = itemView.findViewById(R.id.test_view)
-            testView.text = stringBuilder.toString()
+        viewModel.getAllDiary().observe(this, Observer { diary ->
+            adapter.setDiary(diary)
         })
     }
 }

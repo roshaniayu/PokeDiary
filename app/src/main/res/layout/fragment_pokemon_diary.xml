@@ -16,15 +16,17 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:background="@color/colorPrimary" >
 
             <TextView
-                android:id="@+id/lastest_title"
+                android:id="@+id/latest_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="16dp"
                 android:text="YOUR LATEST DIARY INPUT"
                 android:textStyle="bold"
+                android:textColor="@color/colorAccent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -33,9 +35,24 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="16dp"
-                android:text="aaa"
+                android:text="Latest diary"
+                android:textSize="24sp"
+                android:textStyle="bold"
+                android:textColor="@android:color/white"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/lastest_title" />
+                app:layout_constraintTop_toBottomOf="@+id/latest_title" />
+
+            <TextView
+                android:id="@+id/latest_date"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="16dp"
+                android:layout_marginTop="6dp"
+                android:text="Date"
+                android:textColor="@android:color/white"
+                android:textSize="16sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/latest_diary" />
 
             <Button
                 android:id="@+id/read_more_button"
@@ -45,7 +62,7 @@
                 android:text="Read More"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/latest_diary" />
+                app:layout_constraintTop_toBottomOf="@+id/latest_date" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -58,7 +75,7 @@
         android:text="PokéBox"
         android:textStyle="bold"
         android:textSize="20dp"
-        android:textColor="@color/colorPrimary" />
+        android:textColor="@android:color/black" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/pokemon_box_recyclerview"

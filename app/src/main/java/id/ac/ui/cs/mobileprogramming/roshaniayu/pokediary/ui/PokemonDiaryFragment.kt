@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.TextView
 import androidx.fragment.app.FragmentTransaction
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
@@ -14,6 +15,7 @@ import androidx.recyclerview.widget.RecyclerView
 import id.ac.ui.cs.mobileprogramming.roshaniayu.pokediary.MainActivity
 import id.ac.ui.cs.mobileprogramming.roshaniayu.pokediary.R
 import id.ac.ui.cs.mobileprogramming.roshaniayu.pokediary.adapter.PokemonBoxAdapter
+import id.ac.ui.cs.mobileprogramming.roshaniayu.pokediary.ui.viewmodel.DiaryViewModel
 import id.ac.ui.cs.mobileprogramming.roshaniayu.pokediary.ui.viewmodel.PokemonViewModel
 import id.ac.ui.cs.mobileprogramming.roshaniayu.pokediary.utils.InjectorUtils
 import kotlinx.android.synthetic.main.activity_main.*
@@ -39,8 +41,25 @@ class PokemonDiaryFragment : Fragment() {
 
         (activity as MainActivity).toolbar.title = getString(R.string.app_name)
         pokeboxRecyclerView = itemView.findViewById(R.id.pokemon_box_recyclerview)
-        val readMoreButton: Button = itemView.findViewById(R.id.read_more_button)
 
+        val latestDiaryTextView: TextView = itemView.findViewById(R.id.latest_diary)
+        val latestDateTextView: TextView = itemView.findViewById(R.id.latest_date)
+        val factoryDiary = InjectorUtils.provideDiaryViewModelFactory(itemView.context)
+        val viewModelDiary = ViewModelProviders.of(this, factoryDiary).get(DiaryViewModel::class.java)
+        viewModelDiary.getAllDiary().observe(this, Observer { diary ->
+            val stringBuilder = StringBuilder()
+            if (diary.isNotEmpty()) {
+                val latestInput = diary[0]
+                latestDiaryTextView.text = latestInput.content
+                stringBuilder.append(latestInput.date)
+            } else {
+                stringBuilder.append("There's no input yet")
+            }
+
+            latestDateTextView.text = stringBuilder.toString()
+        })
+
+        val readMoreButton: Button = itemView.findViewById(R.id.read_more_button)
         readMoreButton.setOnClickListener(View.OnClickListener {
             val fragmentTransaction: FragmentTransaction? = activity?.supportFragmentManager?.beginTransaction()
             fragmentTransaction?.replace(R.id.fragment_container, DiaryFragment())

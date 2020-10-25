@@ -12,9 +12,6 @@ import id.ac.ui.cs.mobileprogramming.roshaniayu.pokediary.R
 import id.ac.ui.cs.mobileprogramming.roshaniayu.pokediary.database.entity.PokemonEntity
 
 class PokemonBoxAdapter(internal var context: Context) : RecyclerView.Adapter<PokemonBoxAdapter.ListViewHolder>() {
-
-//    private lateinit var onItemClickCallback: OnItemClickCallback
-
     private var listPokemon: List<PokemonEntity> = listOf()
 
     override fun onCreateViewHolder(view: ViewGroup, viewType: Int): ListViewHolder {
@@ -22,24 +19,11 @@ class PokemonBoxAdapter(internal var context: Context) : RecyclerView.Adapter<Po
         return ListViewHolder(itemView)
     }
 
-//    interface OnItemClickCallback {
-//        fun onItemClicked(data: PokemonEntity, position: Int)
-//    }
-
-//    fun setOnItemClickCallback(onItemClickCallback: OnItemClickCallback) {
-//        this.onItemClickCallback = onItemClickCallback
-//    }
-
     override fun onBindViewHolder(holder: ListViewHolder, position: Int){
-
         var currentPokemon = listPokemon[position]
         Glide.with(context).load(currentPokemon.img).into(holder.image)
         holder.name.text = currentPokemon.name
         holder.level.text = "Level: " + currentPokemon.level
-
-//        holder.itemView.setOnClickListener {
-//            onItemClickCallback.onItemClicked(listPokemon[holder.adapterPosition], position)
-//        }
     }
 
     override fun getItemCount(): Int {
