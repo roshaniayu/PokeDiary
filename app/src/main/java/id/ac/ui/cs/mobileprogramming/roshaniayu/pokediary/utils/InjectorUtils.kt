@@ -10,7 +10,7 @@ import id.ac.ui.cs.mobileprogramming.roshaniayu.pokediary.ui.viewmodel.factory.P
 
 object InjectorUtils {
     fun providePokemonViewModelFactory(context: Context): PokemonViewModelFactory {
-        val contactsRepository = PokemonRepository.getInstance(PokemonDatabase.getInstance(context).pokemonDao())
+        val contactsRepository = PokemonRepository.getInstance(PokemonDatabase.getInstance(context).pokemonDao(),PokemonDatabase.getInstance(context).pokeballDao())
 
         return PokemonViewModelFactory(
             contactsRepository

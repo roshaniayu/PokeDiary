@@ -4,13 +4,16 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
+import id.ac.ui.cs.mobileprogramming.roshaniayu.pokediary.database.dao.PokeballDao
 import id.ac.ui.cs.mobileprogramming.roshaniayu.pokediary.database.dao.PokemonDao
+import id.ac.ui.cs.mobileprogramming.roshaniayu.pokediary.database.entity.PokeballEntity
 import id.ac.ui.cs.mobileprogramming.roshaniayu.pokediary.database.entity.PokemonEntity
 
-@Database(entities = [PokemonEntity::class], version = 2, exportSchema = false)
+@Database(entities = [PokemonEntity::class, PokeballEntity::class], version = 2, exportSchema = false)
 abstract class PokemonDatabase : RoomDatabase() {
 
     abstract fun pokemonDao(): PokemonDao
+    abstract fun pokeballDao(): PokeballDao
 
     companion object {
         @Volatile
