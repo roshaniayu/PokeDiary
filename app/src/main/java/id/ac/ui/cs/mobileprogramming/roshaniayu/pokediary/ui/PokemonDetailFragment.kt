@@ -9,6 +9,7 @@ import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -69,6 +70,7 @@ class PokemonDetailFragment : Fragment() {
         prevEmptyView = itemView.findViewById(R.id.prev_evolution_empty)
         nextEmptyView = itemView.findViewById(R.id.next_evolution_empty)
         catchPokemonButton = itemView.findViewById(R.id.catch_pokemon)
+        catchPokemonButton.isEnabled = true
 
         recyclerType = itemView.findViewById(R.id.type_recyclerview)
         recyclerType.setHasFixedSize(true)
@@ -121,6 +123,17 @@ class PokemonDetailFragment : Fragment() {
             nextEmptyView.visibility = View.VISIBLE
             recyclerNextEvolution.visibility = View.GONE
         }
+
+        viewModel.getAllPokemon().observe(this, Observer { pokemonBox ->
+            if (pokemonBox.isNotEmpty()) {
+                pokemonBox.forEach { caughtPokemon ->
+                    if (pokemon.num == caughtPokemon.num) {
+                        catchPokemonButton.text = "caught"
+                        catchPokemonButton.isEnabled = false
+                    }
+                }
+            }
+        })
 
         // Catch pokemon
         catchPokemonButton.setOnClickListener {
