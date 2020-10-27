@@ -6,23 +6,27 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
-import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.RecyclerView
 import id.ac.ui.cs.mobileprogramming.roshaniayu.pokediary.R
 import id.ac.ui.cs.mobileprogramming.roshaniayu.pokediary.database.entity.DiaryEntity
-import id.ac.ui.cs.mobileprogramming.roshaniayu.pokediary.ui.viewmodel.DiaryViewModel
-import id.ac.ui.cs.mobileprogramming.roshaniayu.pokediary.utils.InjectorUtils
+import id.ac.ui.cs.mobileprogramming.roshaniayu.pokediary.ui.DiaryFragment
 
 class DiaryAdapter(internal var context: Context) : RecyclerView.Adapter<DiaryAdapter.ListViewHolder>() {
     private var listDiary: List<DiaryEntity> = listOf()
-//    private lateinit var viewModel: DiaryViewModel
+    private lateinit var onItemClickCallback: OnItemClickCallback
 
     override fun onCreateViewHolder(view: ViewGroup, viewType: Int): ListViewHolder {
         val itemView: View = LayoutInflater.from(view.context).inflate(R.layout.diary_item, view, false)
-//        val factory = InjectorUtils.provideDiaryViewModelFactory(itemView.context)
-//        viewModel = ViewModelProviders.of(FragmentActivity(), factory).get(DiaryViewModel::class.java)
 
         return ListViewHolder(itemView)
+    }
+
+    interface OnItemClickCallback {
+        fun onItemClicked(data: DiaryEntity)
+    }
+
+    fun setOnItemClickCallback(onItemClickCallback: OnItemClickCallback) {
+        this.onItemClickCallback = onItemClickCallback
     }
 
     override fun onBindViewHolder(holder: ListViewHolder, position: Int){
@@ -30,9 +34,9 @@ class DiaryAdapter(internal var context: Context) : RecyclerView.Adapter<DiaryAd
         holder.content.text = currentDiary.content
         holder.date.text = currentDiary.date
 
-//        holder.deleteButton.setOnClickListener {
-//            viewModel.deleteDiary(currentDiary)
-//        }
+        holder.deleteButton.setOnClickListener {
+            onItemClickCallback.onItemClicked(listDiary[holder.adapterPosition])
+        }
     }
 
     override fun getItemCount(): Int {

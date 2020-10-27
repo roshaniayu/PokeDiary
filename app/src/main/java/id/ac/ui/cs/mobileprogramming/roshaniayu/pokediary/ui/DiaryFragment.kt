@@ -18,6 +18,7 @@ import id.ac.ui.cs.mobileprogramming.roshaniayu.pokediary.MainActivity
 import id.ac.ui.cs.mobileprogramming.roshaniayu.pokediary.R
 import id.ac.ui.cs.mobileprogramming.roshaniayu.pokediary.adapter.DiaryAdapter
 import id.ac.ui.cs.mobileprogramming.roshaniayu.pokediary.database.entity.DiaryEntity
+import id.ac.ui.cs.mobileprogramming.roshaniayu.pokediary.database.entity.PokemonEntity
 import id.ac.ui.cs.mobileprogramming.roshaniayu.pokediary.ui.viewmodel.DiaryViewModel
 import id.ac.ui.cs.mobileprogramming.roshaniayu.pokediary.utils.InjectorUtils
 import kotlinx.android.synthetic.main.activity_main.*
@@ -77,6 +78,10 @@ class DiaryFragment : Fragment() {
         return itemView
     }
 
+    fun deleteDiary(diary: DiaryEntity) {
+        viewModel.deleteDiary(diary)
+    }
+
     private fun showDiaryRecyclerList() {
         val diaryEmpty: TextView = itemView.findViewById(R.id.diary_empty)
         diaryRecyclerView.layoutManager = LinearLayoutManager(itemView.context)
@@ -88,9 +93,16 @@ class DiaryFragment : Fragment() {
         viewModel.getAllDiary().observe(this, Observer { diary ->
             if (diary.isNotEmpty()) {
                 diaryEmpty.visibility = View.GONE
-                adapter.setDiary(diary)
             } else {
                 diaryEmpty.visibility = View.VISIBLE
+            }
+
+            adapter.setDiary(diary)
+        })
+
+        adapter.setOnItemClickCallback(object: DiaryAdapter.OnItemClickCallback {
+            override fun onItemClicked(data: DiaryEntity) {
+                deleteDiary(data)
             }
         })
     }
