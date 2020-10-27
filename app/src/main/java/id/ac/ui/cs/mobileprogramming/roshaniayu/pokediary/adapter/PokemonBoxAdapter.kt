@@ -19,7 +19,7 @@ class PokemonBoxAdapter(internal var context: Context) : RecyclerView.Adapter<Po
         return ListViewHolder(itemView)
     }
 
-    override fun onBindViewHolder(holder: ListViewHolder, position: Int){
+    override fun onBindViewHolder(holder: ListViewHolder, position: Int) {
         var currentPokemon = listPokemon[position]
         Glide.with(context).load(currentPokemon.img).into(holder.image)
         holder.name.text = currentPokemon.name

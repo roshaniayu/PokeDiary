@@ -47,16 +47,14 @@ class PokemonDiaryFragment : Fragment() {
         val factoryDiary = InjectorUtils.provideDiaryViewModelFactory(itemView.context)
         val viewModelDiary = ViewModelProviders.of(this, factoryDiary).get(DiaryViewModel::class.java)
         viewModelDiary.getAllDiary().observe(this, Observer { diary ->
-            val stringBuilder = StringBuilder()
             if (diary.isNotEmpty()) {
                 val latestInput = diary[0]
                 latestDiaryTextView.text = latestInput.content
-                stringBuilder.append(latestInput.date)
+                latestDateTextView.text = latestInput.date
             } else {
-                stringBuilder.append("There's no input yet")
+                latestDiaryTextView.text = "There's no input yet"
+                latestDateTextView.visibility = View.GONE
             }
-
-            latestDateTextView.text = stringBuilder.toString()
         })
 
         val readMoreButton: Button = itemView.findViewById(R.id.read_more_button)
@@ -73,6 +71,7 @@ class PokemonDiaryFragment : Fragment() {
     }
 
     private fun showPokeBoxRecyclerList() {
+        val pokemonBoxEmpty: TextView = itemView.findViewById(R.id.pokemon_box_empty)
         pokeboxRecyclerView.layoutManager = LinearLayoutManager(itemView.context)
         pokeboxRecyclerView.setHasFixedSize(true)
 
@@ -80,7 +79,12 @@ class PokemonDiaryFragment : Fragment() {
         pokeboxRecyclerView.adapter = adapter
 
         viewModel.getAllPokemon().observe(this, Observer { pokemon ->
-            adapter.setPokemon(pokemon)
+            if (pokemon.isNotEmpty()) {
+                pokemonBoxEmpty.visibility = View.GONE
+                adapter.setPokemon(pokemon)
+            } else {
+                pokemonBoxEmpty.visibility = View.VISIBLE
+            }
         })
     }
 }

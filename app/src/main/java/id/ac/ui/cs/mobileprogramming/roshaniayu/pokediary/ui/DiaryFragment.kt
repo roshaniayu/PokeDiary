@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
+import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
@@ -77,6 +78,7 @@ class DiaryFragment : Fragment() {
     }
 
     private fun showDiaryRecyclerList() {
+        val diaryEmpty: TextView = itemView.findViewById(R.id.diary_empty)
         diaryRecyclerView.layoutManager = LinearLayoutManager(itemView.context)
         diaryRecyclerView.setHasFixedSize(true)
 
@@ -84,7 +86,12 @@ class DiaryFragment : Fragment() {
         diaryRecyclerView.adapter = adapter
 
         viewModel.getAllDiary().observe(this, Observer { diary ->
-            adapter.setDiary(diary)
+            if (diary.isNotEmpty()) {
+                diaryEmpty.visibility = View.GONE
+                adapter.setDiary(diary)
+            } else {
+                diaryEmpty.visibility = View.VISIBLE
+            }
         })
     }
 }
