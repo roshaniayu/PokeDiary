@@ -134,7 +134,7 @@ class PokemonDetailFragment : Fragment() {
                 )
             viewModel.catchPokemon(caughtPokemon)
 
-            Toast.makeText(itemView.context, "Pokemon Caught", Toast.LENGTH_SHORT).show()
+            Toast.makeText(itemView.context, "Pokemon's caught", Toast.LENGTH_SHORT).show()
         }
     }
 

@@ -66,8 +66,7 @@ class DiaryFragment : Fragment() {
 
                 val newDiary = DiaryEntity(diaryString, dateString)
                 viewModel.addDiary(newDiary)
-                val submitToast = Toast.makeText(activity, "Diary's created", Toast.LENGTH_SHORT)
-                submitToast.show()
+                Toast.makeText(activity, "Diary's created", Toast.LENGTH_SHORT).show()
             }
 
             diaryInput.setText("")
@@ -80,6 +79,7 @@ class DiaryFragment : Fragment() {
 
     fun deleteDiary(diary: DiaryEntity) {
         viewModel.deleteDiary(diary)
+        Toast.makeText(itemView.context, "Diary's deleted", Toast.LENGTH_SHORT).show()
     }
 
     private fun showDiaryRecyclerList() {

@@ -9,7 +9,6 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import id.ac.ui.cs.mobileprogramming.roshaniayu.pokediary.R
 import id.ac.ui.cs.mobileprogramming.roshaniayu.pokediary.database.entity.DiaryEntity
-import id.ac.ui.cs.mobileprogramming.roshaniayu.pokediary.ui.DiaryFragment
 
 class DiaryAdapter(internal var context: Context) : RecyclerView.Adapter<DiaryAdapter.ListViewHolder>() {
     private var listDiary: List<DiaryEntity> = listOf()

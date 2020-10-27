@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
+import android.widget.Toast
 import androidx.fragment.app.FragmentTransaction
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
@@ -15,6 +16,7 @@ import androidx.recyclerview.widget.RecyclerView
 import id.ac.ui.cs.mobileprogramming.roshaniayu.pokediary.MainActivity
 import id.ac.ui.cs.mobileprogramming.roshaniayu.pokediary.R
 import id.ac.ui.cs.mobileprogramming.roshaniayu.pokediary.adapter.PokemonBoxAdapter
+import id.ac.ui.cs.mobileprogramming.roshaniayu.pokediary.database.entity.PokemonEntity
 import id.ac.ui.cs.mobileprogramming.roshaniayu.pokediary.ui.viewmodel.DiaryViewModel
 import id.ac.ui.cs.mobileprogramming.roshaniayu.pokediary.ui.viewmodel.PokemonViewModel
 import id.ac.ui.cs.mobileprogramming.roshaniayu.pokediary.utils.InjectorUtils
@@ -70,6 +72,11 @@ class PokemonDiaryFragment : Fragment() {
         return itemView
     }
 
+    fun releasePokemon(pokemon: PokemonEntity) {
+        viewModel.deletePokemon(pokemon)
+        Toast.makeText(itemView.context, "Pokemon's released", Toast.LENGTH_SHORT).show()
+    }
+
     private fun showPokeBoxRecyclerList() {
         val pokemonBoxEmpty: TextView = itemView.findViewById(R.id.pokemon_box_empty)
         pokeboxRecyclerView.layoutManager = LinearLayoutManager(itemView.context)
@@ -81,9 +88,16 @@ class PokemonDiaryFragment : Fragment() {
         viewModel.getAllPokemon().observe(this, Observer { pokemon ->
             if (pokemon.isNotEmpty()) {
                 pokemonBoxEmpty.visibility = View.GONE
-                adapter.setPokemon(pokemon)
             } else {
                 pokemonBoxEmpty.visibility = View.VISIBLE
+            }
+
+            adapter.setPokemon(pokemon)
+        })
+
+        adapter.setOnItemClickCallback(object: PokemonBoxAdapter.OnItemClickCallback {
+            override fun onItemClicked(data: PokemonEntity) {
+                releasePokemon(data)
             }
         })
     }
