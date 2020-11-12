@@ -40,7 +40,7 @@
                 android:layout_marginTop="8dp"
                 android:textColor="@android:color/white"
                 android:textColorHint="@color/colorPrimaryDark"
-                android:hint="Your Feeling"
+                android:hint="@string/input_hint"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/diary_title" />
 
@@ -49,7 +49,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="16dp"
-                android:text="Input"
+                android:text="@string/input_button"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/text_diary" />
@@ -67,7 +67,7 @@
         android:textStyle="bold"
         android:gravity="center"
         android:visibility="gone"
-        android:text="There's no input yet" />
+        android:text="@string/diary_empty" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/diary_recyclerview"

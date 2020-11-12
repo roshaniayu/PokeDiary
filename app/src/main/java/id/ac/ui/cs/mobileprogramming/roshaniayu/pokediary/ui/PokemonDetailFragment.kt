@@ -99,8 +99,8 @@ class PokemonDetailFragment : Fragment() {
         Glide.with(activity!!).load(pokemon.img).into(pokemonImage)
 
         pokemonName.text = pokemon.name
-        pokemonHeight.text = "Height: " + pokemon.height
-        pokemonWeight.text = "Weight: " + pokemon.weight
+        pokemonHeight.text = getString(R.string.height) + ": " + pokemon.height
+        pokemonWeight.text = getString(R.string.weight) + ": " + pokemon.weight
 
         val typeAdapter = PokemonTypeAdapter(activity!!, pokemon.type!!)
         recyclerType.adapter = typeAdapter
@@ -128,7 +128,7 @@ class PokemonDetailFragment : Fragment() {
             if (pokemonBox.isNotEmpty()) {
                 pokemonBox.forEach { caughtPokemon ->
                     if (pokemon.num == caughtPokemon.num) {
-                        catchPokemonButton.text = "caught"
+                        catchPokemonButton.text = getString(R.string.caught_pokemon)
                         catchPokemonButton.isEnabled = false
                     }
                 }
@@ -150,7 +150,7 @@ class PokemonDetailFragment : Fragment() {
             val newPokeball = PokeballEntity(pokemon.num, pokemon.name)
             viewModel.addPokeball(newPokeball)
 
-            Toast.makeText(itemView.context, "Pokemon's caught", Toast.LENGTH_SHORT).show()
+            Toast.makeText(itemView.context, getString(R.string.pokemon_caught), Toast.LENGTH_SHORT).show()
         }
     }
 

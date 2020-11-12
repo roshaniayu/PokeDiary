@@ -46,6 +46,7 @@ class PokemonDiaryFragment : Fragment() {
 
         val latestDiaryTextView: TextView = itemView.findViewById(R.id.latest_diary)
         val latestDateTextView: TextView = itemView.findViewById(R.id.latest_date)
+        val readMoreButton: Button = itemView.findViewById(R.id.read_more_button)
         val factoryDiary = InjectorUtils.provideDiaryViewModelFactory(itemView.context)
         val viewModelDiary = ViewModelProviders.of(this, factoryDiary).get(DiaryViewModel::class.java)
         viewModelDiary.getAllDiary().observe(this, Observer { diary ->
@@ -53,19 +54,20 @@ class PokemonDiaryFragment : Fragment() {
                 val latestInput = diary[0]
                 latestDiaryTextView.text = latestInput.content
                 latestDateTextView.text = latestInput.date
+                readMoreButton.text = getString(R.string.read_more_button)
             } else {
-                latestDiaryTextView.text = "There's no input yet"
+                latestDiaryTextView.text = getString(R.string.diary_empty)
                 latestDateTextView.visibility = View.GONE
+                readMoreButton.text = getString(R.string.input_button)
             }
         })
 
-        val readMoreButton: Button = itemView.findViewById(R.id.read_more_button)
-        readMoreButton.setOnClickListener(View.OnClickListener {
+        readMoreButton.setOnClickListener {
             val fragmentTransaction: FragmentTransaction? = activity?.supportFragmentManager?.beginTransaction()
             fragmentTransaction?.replace(R.id.fragment_container, DiaryFragment())
             fragmentTransaction?.addToBackStack("read_more_diary")
             fragmentTransaction?.commit()
-        })
+        }
 
         showPokeBoxRecyclerList()
 
@@ -74,7 +76,7 @@ class PokemonDiaryFragment : Fragment() {
 
     fun releasePokemon(pokemon: PokemonEntity) {
         viewModel.deletePokemon(pokemon)
-        Toast.makeText(itemView.context, "Pokemon's released", Toast.LENGTH_SHORT).show()
+        Toast.makeText(itemView.context, getString(R.string.pokemon_released), Toast.LENGTH_SHORT).show()
     }
 
     private fun showPokeBoxRecyclerList() {

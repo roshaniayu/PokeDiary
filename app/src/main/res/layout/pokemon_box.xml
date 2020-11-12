@@ -60,13 +60,13 @@
                     android:id="@+id/release_pokemon"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Release" />
+                    android:text="@string/release_pokemon" />
 
                 <Button
                     android:id="@+id/train_pokemon"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Train" />
+                    android:text="@string/train_pokemon" />
 
             </LinearLayout>
 

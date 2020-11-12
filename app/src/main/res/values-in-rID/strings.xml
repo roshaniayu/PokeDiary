@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="latest_diary">INPUT DIARY TERBARU ANDA</string>
+    <string name="diary_empty">Belum ada input</string>
+    <string name="read_more_button">Baca Lebih Lanjut</string>
+    <string name="input_hint">Perasaan Anda</string>
+    <string name="input_button">Tambah Diary</string>
+    <string name="pokemon_box_empty">Belum ada pokemon</string>
+    <string name="delete_button">Hapus</string>
+    <string name="field_empty">Field tidak boleh kosong</string>
+    <string name="diary_created">Diary berhasil ditambah</string>
+    <string name="diary_deleted">Diary berhasil dihapus</string>
+    <string name="release_pokemon">Lepas</string>
+    <string name="train_pokemon">Latih</string>
+    <string name="pokemon_released">Pokemon berhasil dilepas</string>
+    <string name="catch_pokemon">Tangkap</string>
+    <string name="caught_pokemon">Tertangkap</string>
+    <string name="pokemon_caught">Pokemon berhasil ditangkap</string>
+    <string name="height">Tinggi</string>
+    <string name="weight">Berat</string>
+    <string name="type">Tipe</string>
+    <string name="weakness">Kelemahan</string>
+    <string name="prev_evolution">Evolusi Sebelumnya</string>
+    <string name="next_evolution">Evolusi Berikutnya</string>
+    <string name="start_stopwatch">Mulai</string>
+    <string name="pause_stopwatch">Berhenti</string>
+    <string name="reset_stopwatch">Ulang</string>
+</resources>

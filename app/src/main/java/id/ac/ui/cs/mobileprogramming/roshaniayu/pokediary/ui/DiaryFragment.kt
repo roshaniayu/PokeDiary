@@ -55,7 +55,7 @@ class DiaryFragment : Fragment() {
             if (diaryString.trim().isEmpty()) {
                 (activity as MainActivity).hideKeyboard()
 
-                val warningToast = Toast.makeText(activity, "Field can't be empty", Toast.LENGTH_SHORT)
+                val warningToast = Toast.makeText(activity, getString(R.string.field_empty), Toast.LENGTH_SHORT)
                 warningToast.setGravity(Gravity.BOTTOM or Gravity.CENTER_HORIZONTAL, 0, 200)
                 warningToast.show()
             } else {
@@ -65,7 +65,7 @@ class DiaryFragment : Fragment() {
 
                 val newDiary = DiaryEntity(diaryString, dateString)
                 viewModel.addDiary(newDiary)
-                Toast.makeText(activity, "Diary's created", Toast.LENGTH_SHORT).show()
+                Toast.makeText(activity, getString(R.string.diary_created), Toast.LENGTH_SHORT).show()
             }
 
             diaryInput.setText("")
@@ -78,7 +78,7 @@ class DiaryFragment : Fragment() {
 
     fun deleteDiary(diary: DiaryEntity) {
         viewModel.deleteDiary(diary)
-        Toast.makeText(itemView.context, "Diary's deleted", Toast.LENGTH_SHORT).show()
+        Toast.makeText(itemView.context, getString(R.string.diary_deleted), Toast.LENGTH_SHORT).show()
     }
 
     private fun showDiaryRecyclerList() {

@@ -1,6 +1,31 @@
 <resources>
-    <string name="app_name">PokéDiary</string>
-    <string name="dictionary_name">PokéXplore</string>
-    <string name="detail_name">PokéDetail</string>
-    <string name="timer_name">PokéWatch</string>
+    <string name="app_name" translatable="false">PokéDiary</string>
+    <string name="dictionary_name" translatable="false">PokéXplore</string>
+    <string name="detail_name" translatable="false">PokéDetail</string>
+    <string name="timer_name" translatable="false">PokéWatch</string>
+    <string name="latest_diary">YOUR LATEST DIARY INPUT</string>
+    <string name="diary_empty">There\'s no input yet</string>
+    <string name="read_more_button">Read More</string>
+    <string name="input_hint">Your Feeling</string>
+    <string name="input_button">Add Diary</string>
+    <string name="pokemon_box_empty">There\'s no pokemon yet</string>
+    <string name="delete_button">Delete</string>
+    <string name="field_empty">Field can\'t be empty</string>
+    <string name="diary_created">Diary\'s added</string>
+    <string name="diary_deleted">Diary\'s deleted</string>
+    <string name="release_pokemon">Release</string>
+    <string name="train_pokemon">Train</string>
+    <string name="pokemon_released">Pokemon\'s released</string>
+    <string name="catch_pokemon">Catch</string>
+    <string name="caught_pokemon">Caught</string>
+    <string name="pokemon_caught">Pokemon\'s caught</string>
+    <string name="height">Height</string>
+    <string name="weight">Weight</string>
+    <string name="type">Type</string>
+    <string name="weakness">Weakness</string>
+    <string name="prev_evolution">Previous Evolution</string>
+    <string name="next_evolution">Next Evolution</string>
+    <string name="start_stopwatch">Start</string>
+    <string name="pause_stopwatch">Pause</string>
+    <string name="reset_stopwatch">Reset</string>
 </resources>

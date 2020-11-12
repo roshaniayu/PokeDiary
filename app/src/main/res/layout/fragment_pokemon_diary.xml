@@ -24,7 +24,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="16dp"
-                android:text="YOUR LATEST DIARY INPUT"
+                android:text="@string/latest_diary"
                 android:textStyle="bold"
                 android:textColor="@color/colorAccent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -59,7 +59,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="16dp"
-                android:text="Read More"
+                android:text="@string/read_more_button"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/latest_date" />
@@ -86,7 +86,7 @@
         android:textStyle="bold"
         android:gravity="center"
         android:visibility="gone"
-        android:text="There's no pokemon yet" />
+        android:text="@string/pokemon_box_empty" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/pokemon_box_recyclerview"

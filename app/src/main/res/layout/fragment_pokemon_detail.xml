@@ -45,7 +45,7 @@
 
                     <TextView
                         android:id="@+id/height"
-                        android:text="Height"
+                        android:text="@string/height"
                         android:layout_marginBottom="10dp"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -54,7 +54,7 @@
 
                     <TextView
                         android:id="@+id/weight"
-                        android:text="Weight"
+                        android:text="@string/weight"
                         android:layout_marginBottom="10dp"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -62,7 +62,7 @@
                         android:textStyle="bold" />
 
                     <TextView
-                        android:text="Type"
+                        android:text="@string/type"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="left"
@@ -76,7 +76,7 @@
                         android:layout_height="40dp" />
 
                     <TextView
-                        android:text="Weakness"
+                        android:text="@string/weakness"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="left"
@@ -90,7 +90,7 @@
                         android:layout_height="40dp" />
 
                     <TextView
-                        android:text="Previous Evolution"
+                        android:text="@string/prev_evolution"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="left"
@@ -116,7 +116,7 @@
                         android:text="-" />
 
                     <TextView
-                        android:text="Next Evolution"
+                        android:text="@string/next_evolution"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="left"
@@ -145,7 +145,7 @@
                         android:id="@+id/catch_pokemon"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Catch" />
+                        android:text="@string/catch_pokemon" />
 
                 </LinearLayout>
 
