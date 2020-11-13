@@ -1,5 +1,6 @@
 package id.ac.ui.cs.mobileprogramming.roshaniayu.pokediary.ui
 
+import android.content.res.Configuration
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -44,7 +45,11 @@ class PokemonListFragment : Fragment() {
 
         recyclerView = itemView.findViewById(R.id.pokemon_recyclerview) as RecyclerView
         recyclerView.setHasFixedSize(true)
-        recyclerView.layoutManager = GridLayoutManager(activity, 2)
+        if (resources.configuration.orientation == Configuration.ORIENTATION_LANDSCAPE) {
+            recyclerView.layoutManager = GridLayoutManager(activity, 3)
+        } else {
+            recyclerView.layoutManager = GridLayoutManager(activity, 2)
+        }
         val itemDecoration =
             ItemOffsetDecoration(
                 activity!!,

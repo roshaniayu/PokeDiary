@@ -17,68 +17,49 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/colorPrimary" >
+            android:background="@color/colorPrimary">
 
             <TextView
-                android:id="@+id/latest_title"
-                android:layout_width="wrap_content"
+                android:id="@+id/diary_title"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="16dp"
-                android:text="@string/latest_diary"
+                android:layout_marginHorizontal="16dp"
+                android:layout_marginTop="16dp"
+                android:text="Dear Diary,"
+                android:textColor="@android:color/white"
+                android:textSize="45dp"
                 android:textStyle="bold"
-                android:textColor="@color/colorAccent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
-            <TextView
-                android:id="@+id/latest_diary"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="16dp"
-                android:text="Latest diary"
-                android:textSize="24sp"
-                android:textStyle="bold"
-                android:textColor="@android:color/white"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/latest_title" />
-
-            <TextView
-                android:id="@+id/latest_date"
-                android:layout_width="wrap_content"
+            <EditText
+                android:id="@+id/text_diary"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="16dp"
-                android:layout_marginTop="6dp"
-                android:text="Date"
+                android:layout_marginTop="8dp"
+                android:hint="@string/input_hint"
                 android:textColor="@android:color/white"
-                android:textSize="16sp"
+                android:textColorHint="@color/colorPrimaryDark"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/latest_diary" />
+                app:layout_constraintTop_toBottomOf="@+id/diary_title" />
 
             <Button
-                android:id="@+id/read_more_button"
+                android:id="@+id/input_button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="16dp"
-                android:text="@string/read_more_button"
+                android:text="@string/input_button"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/latest_date" />
+                app:layout_constraintTop_toBottomOf="@+id/text_diary" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </androidx.cardview.widget.CardView>
 
     <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
-        android:text="PokéBox"
-        android:textStyle="bold"
-        android:textSize="20dp"
-        android:textColor="@android:color/secondary_text_light" />
-
-    <TextView
-        android:id="@+id/pokemon_box_empty"
+        android:id="@+id/diary_empty"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
@@ -86,12 +67,12 @@
         android:textStyle="bold"
         android:gravity="center"
         android:visibility="gone"
-        android:text="@string/pokemon_box_empty" />
+        android:text="@string/diary_empty" />
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/pokemon_box_recyclerview"
+        android:id="@+id/diary_recyclerview"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:listitem="@layout/pokemon_box" />
+        tools:listitem="@layout/diary_item" />
 
 </LinearLayout>
