@@ -1,13 +1,7 @@
 package id.ac.ui.cs.mobileprogramming.roshaniayu.pokediary
 
-import android.content.BroadcastReceiver
-import android.content.Context
-import android.content.Intent
-import android.content.IntentFilter
-import android.os.Bundle
-import android.os.Handler
-import android.os.Looper
-import android.os.SystemClock
+import android.content.*
+import android.os.*
 import android.view.MenuItem
 import android.view.inputmethod.InputMethodManager
 import android.widget.TextView
@@ -17,6 +11,7 @@ import androidx.fragment.app.FragmentManager
 import androidx.localbroadcastmanager.content.LocalBroadcastManager
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import id.ac.ui.cs.mobileprogramming.roshaniayu.pokediary.common.Common
+import id.ac.ui.cs.mobileprogramming.roshaniayu.pokediary.service.FetchService
 import id.ac.ui.cs.mobileprogramming.roshaniayu.pokediary.ui.PokemonDetailFragment
 import id.ac.ui.cs.mobileprogramming.roshaniayu.pokediary.ui.PokemonDiaryFragment
 import id.ac.ui.cs.mobileprogramming.roshaniayu.pokediary.ui.PokemonListFragment
@@ -32,8 +27,22 @@ class MainActivity : AppCompatActivity() {
     private var seconds: Int = 0
     private var minutes: Int = 0
     private var milliSeconds: Int = 0
+    lateinit var mService: FetchService
+    var mBound: Boolean = false
     private lateinit var mHandler: Handler
     private lateinit var mRunnable: Runnable
+
+    private val connection = object : ServiceConnection {
+        override fun onServiceConnected(className: ComponentName, service: IBinder) {
+            val binder = service as FetchService.LocalBinder
+            mService = binder.getService()
+            mBound = true
+        }
+
+        override fun onServiceDisconnected(arg0: ComponentName) {
+            mBound = false
+        }
+    }
 
     // Create broadcast handle
     private val showDetail = object : BroadcastReceiver() {
@@ -73,6 +82,15 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    override fun onStart() {
+        super.onStart()
+        // Bind to LocalService
+        Intent(this, FetchService::class.java).also { intent ->
+            startService(intent)
+            bindService(intent, connection, Context.BIND_AUTO_CREATE)
+        }
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -93,7 +111,6 @@ class MainActivity : AppCompatActivity() {
         // Register broadcast
         LocalBroadcastManager.getInstance(this).registerReceiver(showDetail, IntentFilter(Common.KEY_ENABLE_HOME))
         LocalBroadcastManager.getInstance(this).registerReceiver(showEvolution, IntentFilter(Common.KEY_NUM_EVOLUTION))
-
 
         val bottomNav: BottomNavigationView = findViewById(R.id.bottom_navigation)
         bottomNav.setOnNavigationItemSelectedListener { item ->
