@@ -2,10 +2,10 @@ package id.ac.ui.cs.mobileprogramming.roshaniayu.pokediary.ui
 
 import android.content.res.Configuration
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import id.ac.ui.cs.mobileprogramming.roshaniayu.pokediary.MainActivity
@@ -19,6 +19,7 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.activity_main.*
+
 
 /**
  * A simple [Fragment] subclass.
@@ -45,10 +46,19 @@ class PokemonListFragment : Fragment() {
 
         recyclerView = itemView.findViewById(R.id.pokemon_recyclerview) as RecyclerView
         recyclerView.setHasFixedSize(true)
-        if (resources.configuration.orientation == Configuration.ORIENTATION_LANDSCAPE) {
-            recyclerView.layoutManager = GridLayoutManager(activity, 3)
+        val tabletSize = resources.getBoolean(R.bool.isTablet)
+        if (tabletSize) {
+            if (resources.configuration.orientation == Configuration.ORIENTATION_LANDSCAPE) {
+                recyclerView.layoutManager = GridLayoutManager(activity, 4)
+            } else {
+                recyclerView.layoutManager = GridLayoutManager(activity, 3)
+            }
         } else {
-            recyclerView.layoutManager = GridLayoutManager(activity, 2)
+            if (resources.configuration.orientation == Configuration.ORIENTATION_LANDSCAPE) {
+                recyclerView.layoutManager = GridLayoutManager(activity, 3)
+            } else {
+                recyclerView.layoutManager = GridLayoutManager(activity, 2)
+            }
         }
         val itemDecoration =
             ItemOffsetDecoration(
