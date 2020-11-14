@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.ImageView
+import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
@@ -14,7 +15,8 @@ import id.ac.ui.cs.mobileprogramming.roshaniayu.pokediary.database.entity.Pokemo
 
 class PokemonBoxAdapter(internal var context: Context) : RecyclerView.Adapter<PokemonBoxAdapter.ListViewHolder>() {
     private var listPokemon: List<PokemonEntity> = listOf()
-    private lateinit var onItemClickCallback: OnItemClickCallback
+    private lateinit var onReleaseClickCallback: OnReleaseClickCallback
+    private lateinit var onTrainClickCallback: OnTrainClickCallback
 
     override fun onCreateViewHolder(view: ViewGroup, viewType: Int): ListViewHolder {
         val itemView: View = LayoutInflater.from(view.context).inflate(R.layout.pokemon_box, view, false)
@@ -22,12 +24,26 @@ class PokemonBoxAdapter(internal var context: Context) : RecyclerView.Adapter<Po
         return ListViewHolder(itemView)
     }
 
-    interface OnItemClickCallback {
-        fun onItemClicked(data: PokemonEntity)
+    interface OnReleaseClickCallback {
+        fun onReleaseClicked(data: PokemonEntity)
     }
 
-    fun setOnItemClickCallback(onItemClickCallback: OnItemClickCallback) {
-        this.onItemClickCallback = onItemClickCallback
+    fun setOnReleaseClickCallback(onReleaseClickCallback: OnReleaseClickCallback) {
+        this.onReleaseClickCallback = onReleaseClickCallback
+    }
+
+    interface OnTrainClickCallback {
+        fun onTrainClicked(
+            data: PokemonEntity,
+            releaseButton: Button,
+            trainButton: Button,
+            disabledCard: LinearLayout,
+            trainingTimer: TextView
+        )
+    }
+
+    fun setOnTrainClickCallback(onTrainClickCallback: OnTrainClickCallback) {
+        this.onTrainClickCallback = onTrainClickCallback
     }
 
     override fun onBindViewHolder(holder: ListViewHolder, position: Int) {
@@ -37,7 +53,11 @@ class PokemonBoxAdapter(internal var context: Context) : RecyclerView.Adapter<Po
         holder.level.text = "Level: " + currentPokemon.level
 
         holder.releaseButton.setOnClickListener {
-            onItemClickCallback.onItemClicked(listPokemon[holder.adapterPosition])
+            onReleaseClickCallback.onReleaseClicked(listPokemon[holder.adapterPosition])
+        }
+
+        holder.trainButton.setOnClickListener {
+            onTrainClickCallback.onTrainClicked(listPokemon[holder.adapterPosition], holder.releaseButton, holder.trainButton, holder.disabledCard, holder.trainingTimer)
         }
     }
 
@@ -55,5 +75,8 @@ class PokemonBoxAdapter(internal var context: Context) : RecyclerView.Adapter<Po
         var name: TextView = itemView.findViewById(R.id.pokemon_name)
         var level: TextView = itemView.findViewById(R.id.pokemon_level)
         var releaseButton: Button = itemView.findViewById(R.id.release_pokemon)
+        var trainButton: Button = itemView.findViewById(R.id.train_pokemon)
+        var disabledCard: LinearLayout = itemView.findViewById(R.id.disabled_card)
+        var trainingTimer: TextView = itemView.findViewById(R.id.training_timer)
     }
 }

@@ -13,11 +13,12 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
 
-
 class FetchService : Service() {
+    var pokemonList = MutableLiveData<List<Pokemon>>()
     private var compositeDisposable = CompositeDisposable()
     private var pokedexService: PokedexService
-    var pokemonList = MutableLiveData<List<Pokemon>>()
+    // Binder given to clients
+    private val binder = LocalBinder()
 
     init {
         val retrofit = PokedexClient.instance
@@ -36,9 +37,6 @@ class FetchService : Service() {
 
         return START_STICKY
     }
-
-    // Binder given to clients
-    private val binder = LocalBinder()
 
     /**
      * Class used for the client Binder.  Because we know this service always

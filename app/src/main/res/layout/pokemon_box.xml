@@ -74,4 +74,31 @@
 
     </LinearLayout>
 
+    <LinearLayout
+        android:id="@+id/disabled_card"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#C3434343"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:visibility="gone">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textStyle="bold"
+            android:text="Training in Progress"
+            android:textSize="24sp"
+            android:textColor="@android:color/white"/>
+
+        <TextView
+            android:id="@+id/training_timer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Time"
+            android:textSize="20sp"
+            android:textColor="@color/colorAccent"/>
+
+    </LinearLayout>
+
 </androidx.cardview.widget.CardView>

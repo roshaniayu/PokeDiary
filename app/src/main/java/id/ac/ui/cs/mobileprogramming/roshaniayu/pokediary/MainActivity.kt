@@ -27,13 +27,15 @@ class MainActivity : AppCompatActivity() {
     private var seconds: Int = 0
     private var minutes: Int = 0
     private var milliSeconds: Int = 0
-    lateinit var mService: FetchService
-    var mBound: Boolean = false
     private lateinit var mHandler: Handler
     private lateinit var mRunnable: Runnable
+    lateinit var mService: FetchService
+    var mBound: Boolean = false
 
+    /** Defines callbacks for service binding, passed to bindService()  */
     private val connection = object : ServiceConnection {
         override fun onServiceConnected(className: ComponentName, service: IBinder) {
+            // We've bound to LocalService, cast the IBinder and get LocalService instance
             val binder = service as FetchService.LocalBinder
             mService = binder.getService()
             mBound = true
@@ -82,15 +84,6 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    override fun onStart() {
-        super.onStart()
-        // Bind to LocalService
-        Intent(this, FetchService::class.java).also { intent ->
-            startService(intent)
-            bindService(intent, connection, Context.BIND_AUTO_CREATE)
-        }
-    }
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -130,6 +123,15 @@ class MainActivity : AppCompatActivity() {
 
         supportFragmentManager.beginTransaction().replace(R.id.fragment_container,
             PokemonDiaryFragment()).commit()
+    }
+
+    override fun onStart() {
+        super.onStart()
+        // Bind to LocalService
+        Intent(this, FetchService::class.java).also { intent ->
+            startService(intent)
+            bindService(intent, connection, Context.BIND_AUTO_CREATE)
+        }
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {

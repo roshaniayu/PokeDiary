@@ -47,11 +47,7 @@ class PokemonListFragment : Fragment() {
                 recyclerView.layoutManager = GridLayoutManager(activity, 2)
             }
         }
-        val itemDecoration =
-            ItemOffsetDecoration(
-                activity!!,
-                R.dimen.spacing
-            )
+        val itemDecoration = ItemOffsetDecoration(activity!!, R.dimen.spacing)
         recyclerView.addItemDecoration(itemDecoration)
 
         if ((activity as MainActivity).mBound) {

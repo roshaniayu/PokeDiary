@@ -4,10 +4,12 @@ import android.app.AlertDialog
 import android.content.DialogInterface
 import android.graphics.Color
 import android.os.Bundle
+import android.os.CountDownTimer
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.LinearLayout
 import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
@@ -113,6 +115,27 @@ class PokemonDiaryFragment : Fragment() {
         dialog.getButton(AlertDialog.BUTTON_NEGATIVE).setTextColor(Color.parseColor("#808080"))
     }
 
+    fun trainPokemon(pokemon: PokemonEntity, releaseButton: Button, trainButton: Button,
+                     disabledCard: LinearLayout, trainingTimer: TextView) {
+        releaseButton.isEnabled = false
+        trainButton.isEnabled = false
+        disabledCard.visibility = View.VISIBLE
+
+        object : CountDownTimer((10000 * pokemon.level).toLong(), 1000) {
+            override fun onTick(millisUntilFinish: Long) {
+                trainingTimer.text = (millisUntilFinish / 1000).toString()
+            }
+
+            override fun onFinish() {
+                pokemon.level += 1
+                viewModel.updatePokemon(pokemon)
+                releaseButton.isEnabled = true
+                trainButton.isEnabled = true
+                disabledCard.visibility = View.GONE
+            }
+        }.start()
+    }
+
     private fun showPokeBoxRecyclerList() {
         val pokemonBoxEmpty: TextView = itemView.findViewById(R.id.pokemon_box_empty)
         pokeboxRecyclerView.layoutManager = LinearLayoutManager(itemView.context)
@@ -131,9 +154,21 @@ class PokemonDiaryFragment : Fragment() {
             adapter.setPokemon(pokemon)
         })
 
-        adapter.setOnItemClickCallback(object: PokemonBoxAdapter.OnItemClickCallback {
-            override fun onItemClicked(data: PokemonEntity) {
+        adapter.setOnReleaseClickCallback(object: PokemonBoxAdapter.OnReleaseClickCallback {
+            override fun onReleaseClicked(data: PokemonEntity) {
                 releasePokemon(data)
+            }
+        })
+
+        adapter.setOnTrainClickCallback(object: PokemonBoxAdapter.OnTrainClickCallback {
+            override fun onTrainClicked(
+                data: PokemonEntity,
+                releaseButton: Button,
+                trainButton: Button,
+                disabledCard: LinearLayout,
+                trainingTimer: TextView
+            ) {
+                trainPokemon(data, releaseButton, trainButton, disabledCard, trainingTimer)
             }
         })
     }
