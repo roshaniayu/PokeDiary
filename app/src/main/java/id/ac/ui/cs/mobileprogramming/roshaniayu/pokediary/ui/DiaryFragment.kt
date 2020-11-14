@@ -1,5 +1,7 @@
 package id.ac.ui.cs.mobileprogramming.roshaniayu.pokediary.ui
 
+import android.app.AlertDialog
+import android.content.DialogInterface
 import android.os.Bundle
 import android.view.Gravity
 import android.view.LayoutInflater
@@ -77,8 +79,39 @@ class DiaryFragment : Fragment() {
     }
 
     fun deleteDiary(diary: DiaryEntity) {
-        viewModel.deleteDiary(diary)
-        Toast.makeText(itemView.context, getString(R.string.diary_deleted), Toast.LENGTH_SHORT).show()
+        // Build an AlertDialog
+        val builder: AlertDialog.Builder = AlertDialog.Builder(activity)
+
+        // Set a title for alert dialog
+        builder.setTitle(getString(R.string.delete_alert_dialog))
+
+        // Ask the final question
+        builder.setMessage(getString(R.string.delete_alert_message))
+
+        // Set click listener for alert dialog buttons
+        val dialogClickListener =
+            DialogInterface.OnClickListener { _, which ->
+                when (which) {
+                    DialogInterface.BUTTON_POSITIVE -> {
+                        viewModel.deleteDiary(diary)
+                        Toast.makeText(itemView.context, getString(R.string.diary_deleted), Toast.LENGTH_SHORT).show()
+                    }
+                    DialogInterface.BUTTON_NEGATIVE -> {
+                    }
+                }
+            }
+
+        // Set the alert dialog yes button click listener
+        builder.setPositiveButton(getString(R.string.yes), dialogClickListener)
+
+        // Set the alert dialog no button click listener
+        builder.setNegativeButton(getString(R.string.no), dialogClickListener)
+
+        val dialog: AlertDialog = builder.create()
+        // Display the alert dialog on interface
+        dialog.show()
+        dialog.getButton(AlertDialog.BUTTON_POSITIVE).setTextColor(R.color.grey!!)
+        dialog.getButton(AlertDialog.BUTTON_NEGATIVE).setTextColor(R.color.grey!!)
     }
 
     private fun showDiaryRecyclerList() {

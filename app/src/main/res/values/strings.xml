@@ -28,4 +28,10 @@
     <string name="start_stopwatch">Start</string>
     <string name="pause_stopwatch">Pause</string>
     <string name="reset_stopwatch">Reset</string>
+    <string name="release_alert_dialog">Release Pokemon</string>
+    <string name="release_alert_message">Are you sure you want to release this pokemon?</string>
+    <string name="delete_alert_dialog">Delete Diary</string>
+    <string name="delete_alert_message">Are you sure you want to delete this diary?</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
 </resources>

@@ -1,13 +1,15 @@
 package id.ac.ui.cs.mobileprogramming.roshaniayu.pokediary.ui
 
+import android.app.AlertDialog
+import android.content.DialogInterface
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
@@ -21,6 +23,7 @@ import id.ac.ui.cs.mobileprogramming.roshaniayu.pokediary.ui.viewmodel.DiaryView
 import id.ac.ui.cs.mobileprogramming.roshaniayu.pokediary.ui.viewmodel.PokemonViewModel
 import id.ac.ui.cs.mobileprogramming.roshaniayu.pokediary.utils.InjectorUtils
 import kotlinx.android.synthetic.main.activity_main.*
+
 
 /**
  * A simple [Fragment] subclass.
@@ -75,8 +78,39 @@ class PokemonDiaryFragment : Fragment() {
     }
 
     fun releasePokemon(pokemon: PokemonEntity) {
-        viewModel.deletePokemon(pokemon)
-        Toast.makeText(itemView.context, getString(R.string.pokemon_released), Toast.LENGTH_SHORT).show()
+        // Build an AlertDialog
+        val builder: AlertDialog.Builder = AlertDialog.Builder(activity)
+
+        // Set a title for alert dialog
+        builder.setTitle(getString(R.string.release_alert_dialog))
+
+        // Ask the final question
+        builder.setMessage(getString(R.string.release_alert_message))
+
+        // Set click listener for alert dialog buttons
+        val dialogClickListener =
+            DialogInterface.OnClickListener { _, which ->
+                when (which) {
+                    DialogInterface.BUTTON_POSITIVE -> {
+                        viewModel.deletePokemon(pokemon)
+                        Toast.makeText(itemView.context, getString(R.string.pokemon_released), Toast.LENGTH_SHORT).show()
+                    }
+                    DialogInterface.BUTTON_NEGATIVE -> {
+                    }
+                }
+            }
+
+        // Set the alert dialog yes button click listener
+        builder.setPositiveButton(getString(R.string.yes), dialogClickListener)
+
+        // Set the alert dialog no button click listener
+        builder.setNegativeButton(getString(R.string.no), dialogClickListener)
+
+        val dialog: AlertDialog = builder.create()
+        // Display the alert dialog on interface
+        dialog.show()
+        dialog.getButton(AlertDialog.BUTTON_POSITIVE).setTextColor(R.color.grey!!)
+        dialog.getButton(AlertDialog.BUTTON_NEGATIVE).setTextColor(R.color.grey!!)
     }
 
     private fun showPokeBoxRecyclerList() {
