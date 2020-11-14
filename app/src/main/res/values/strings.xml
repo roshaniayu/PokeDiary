@@ -3,8 +3,8 @@
     <string name="dictionary_name" translatable="false">PokéXplore</string>
     <string name="detail_name" translatable="false">PokéDetail</string>
     <string name="timer_name" translatable="false">PokéWatch</string>
-    <string name="latest_diary">YOUR LATEST DIARY INPUT</string>
-    <string name="diary_empty">There\'s no input yet</string>
+    <string name="latest_diary">YOUR LATEST DIARY ENTRY</string>
+    <string name="diary_empty">There\'s no entry yet</string>
     <string name="read_more_button">Read More</string>
     <string name="input_hint">Your Feeling</string>
     <string name="input_button">Add Diary</string>

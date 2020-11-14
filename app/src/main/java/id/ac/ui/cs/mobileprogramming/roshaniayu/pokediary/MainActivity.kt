@@ -8,15 +8,17 @@ import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import android.os.SystemClock
+import android.view.MenuItem
 import android.view.inputmethod.InputMethodManager
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
 import androidx.localbroadcastmanager.content.LocalBroadcastManager
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import id.ac.ui.cs.mobileprogramming.roshaniayu.pokediary.common.Common
-import id.ac.ui.cs.mobileprogramming.roshaniayu.pokediary.ui.PokemonDiaryFragment
 import id.ac.ui.cs.mobileprogramming.roshaniayu.pokediary.ui.PokemonDetailFragment
+import id.ac.ui.cs.mobileprogramming.roshaniayu.pokediary.ui.PokemonDiaryFragment
 import id.ac.ui.cs.mobileprogramming.roshaniayu.pokediary.ui.PokemonListFragment
 import id.ac.ui.cs.mobileprogramming.roshaniayu.pokediary.ui.StopwatchFragment
 
@@ -37,9 +39,6 @@ class MainActivity : AppCompatActivity() {
     private val showDetail = object : BroadcastReceiver() {
         override fun onReceive(context: Context?, intent: Intent?) {
             if (intent?.action.toString() == Common.KEY_ENABLE_HOME) {
-//                supportActionBar?.setDisplayHomeAsUpEnabled(true)
-//                supportActionBar?.setDisplayShowHomeEnabled(true)
-
                 // Replace fragment
                 val detailFragment = PokemonDetailFragment.getInstance()
                 val position = intent?.getIntExtra("position", -1)
@@ -58,9 +57,6 @@ class MainActivity : AppCompatActivity() {
     private val showEvolution = object : BroadcastReceiver() {
         override fun onReceive(context: Context?, intent: Intent?) {
             if (intent?.action.toString() == Common.KEY_NUM_EVOLUTION) {
-//                supportActionBar?.setDisplayHomeAsUpEnabled(true)
-//                supportActionBar?.setDisplayShowHomeEnabled(true)
-
                 // Replace fragment
                 val detailFragment = PokemonDetailFragment.getInstance()
                 val num = intent?.getStringExtra("num")
@@ -119,19 +115,16 @@ class MainActivity : AppCompatActivity() {
             PokemonDiaryFragment()).commit()
     }
 
-//    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-//        when (item.itemId) {
-//            android.R.id.home -> {
-//                // Clear all fragment in stack with name 'detail_pokemon'
-//                supportFragmentManager.popBackStack("detail_pokemon", FragmentManager.POP_BACK_STACK_INCLUSIVE)
-//
-//                supportActionBar?.setDisplayShowHomeEnabled(false)
-//                supportActionBar?.setDisplayHomeAsUpEnabled(false)
-//            }
-//        }
-//
-//        return true
-//    }
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            android.R.id.home -> {
+                // Clear all fragment in stack with name 'detail_pokemon'
+                supportFragmentManager.popBackStack("detail_pokemon", FragmentManager.POP_BACK_STACK_INCLUSIVE)
+            }
+        }
+
+        return true
+    }
 
     fun hideKeyboard() {
         val inputManager: InputMethodManager = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager

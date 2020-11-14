@@ -2,6 +2,7 @@ package id.ac.ui.cs.mobileprogramming.roshaniayu.pokediary.ui
 
 import android.app.AlertDialog
 import android.content.DialogInterface
+import android.graphics.Color
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -23,7 +24,6 @@ import id.ac.ui.cs.mobileprogramming.roshaniayu.pokediary.ui.viewmodel.DiaryView
 import id.ac.ui.cs.mobileprogramming.roshaniayu.pokediary.ui.viewmodel.PokemonViewModel
 import id.ac.ui.cs.mobileprogramming.roshaniayu.pokediary.utils.InjectorUtils
 import kotlinx.android.synthetic.main.activity_main.*
-
 
 /**
  * A simple [Fragment] subclass.
@@ -109,8 +109,8 @@ class PokemonDiaryFragment : Fragment() {
         val dialog: AlertDialog = builder.create()
         // Display the alert dialog on interface
         dialog.show()
-        dialog.getButton(AlertDialog.BUTTON_POSITIVE).setTextColor(R.color.grey!!)
-        dialog.getButton(AlertDialog.BUTTON_NEGATIVE).setTextColor(R.color.grey!!)
+        dialog.getButton(AlertDialog.BUTTON_POSITIVE).setTextColor(Color.parseColor("#808080"))
+        dialog.getButton(AlertDialog.BUTTON_NEGATIVE).setTextColor(Color.parseColor("#808080"))
     }
 
     private fun showPokeBoxRecyclerList() {

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="latest_diary">INPUT DIARY TERBARU ANDA</string>
-    <string name="diary_empty">Belum ada input</string>
+    <string name="latest_diary">ENTRI DIARY TERBARU ANDA</string>
+    <string name="diary_empty">Belum ada entri</string>
     <string name="read_more_button">Baca Lebih Lanjut</string>
     <string name="input_hint">Perasaan Anda</string>
     <string name="input_button">Tambah Diary</string>

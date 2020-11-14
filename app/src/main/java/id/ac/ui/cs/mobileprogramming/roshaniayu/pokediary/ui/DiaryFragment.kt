@@ -2,6 +2,7 @@ package id.ac.ui.cs.mobileprogramming.roshaniayu.pokediary.ui
 
 import android.app.AlertDialog
 import android.content.DialogInterface
+import android.graphics.Color
 import android.os.Bundle
 import android.view.Gravity
 import android.view.LayoutInflater
@@ -110,8 +111,8 @@ class DiaryFragment : Fragment() {
         val dialog: AlertDialog = builder.create()
         // Display the alert dialog on interface
         dialog.show()
-        dialog.getButton(AlertDialog.BUTTON_POSITIVE).setTextColor(R.color.grey!!)
-        dialog.getButton(AlertDialog.BUTTON_NEGATIVE).setTextColor(R.color.grey!!)
+        dialog.getButton(AlertDialog.BUTTON_POSITIVE).setTextColor(Color.parseColor("#808080"))
+        dialog.getButton(AlertDialog.BUTTON_NEGATIVE).setTextColor(Color.parseColor("#808080"))
     }
 
     private fun showDiaryRecyclerList() {
