@@ -33,5 +33,6 @@
     <string name="delete_alert_dialog">Delete Diary</string>
     <string name="delete_alert_message">Are you sure you want to delete this diary?</string>
     <string name="yes">Yes</string>
-    <string name="no">No</string>
+    <string name="no">Back</string>
+    <string name="training_pokemon">Training in Progress</string>
 </resources>

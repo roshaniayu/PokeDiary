@@ -30,5 +30,6 @@
     <string name="delete_alert_dialog">Hapus Diary</string>
     <string name="delete_alert_message">Apakah Anda yakin ingin menghapus diary ini?</string>
     <string name="yes">Ya</string>
-    <string name="no">Tidak</string>
+    <string name="no">Kembali</string>
+    <string name="training_pokemon">Pelatihan sedang Berlangsung</string>
 </resources>

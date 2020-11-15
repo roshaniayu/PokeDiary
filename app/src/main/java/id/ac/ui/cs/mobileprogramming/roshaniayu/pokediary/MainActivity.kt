@@ -10,6 +10,8 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.localbroadcastmanager.content.LocalBroadcastManager
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import id.ac.ui.cs.mobileprogramming.roshaniayu.pokediary.broadcastreceiver.ShowDetailReceiver
+import id.ac.ui.cs.mobileprogramming.roshaniayu.pokediary.broadcastreceiver.ShowEvolutionReceiver
 import id.ac.ui.cs.mobileprogramming.roshaniayu.pokediary.common.Common
 import id.ac.ui.cs.mobileprogramming.roshaniayu.pokediary.service.FetchService
 import id.ac.ui.cs.mobileprogramming.roshaniayu.pokediary.ui.PokemonDetailFragment
@@ -46,44 +48,6 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    // Create broadcast handle
-    private val showDetail = object : BroadcastReceiver() {
-        override fun onReceive(context: Context?, intent: Intent?) {
-            if (intent?.action.toString() == Common.KEY_ENABLE_HOME) {
-                // Replace fragment
-                val detailFragment = PokemonDetailFragment.getInstance()
-                val position = intent?.getIntExtra("position", -1)
-                val bundle = Bundle()
-                bundle.putInt("position", position!!)
-                detailFragment.arguments = bundle
-
-                val fragmentTransaction = supportFragmentManager.beginTransaction()
-                fragmentTransaction.replace(R.id.fragment_container, detailFragment)
-                fragmentTransaction.addToBackStack("detail_pokemon")
-                fragmentTransaction.commit()
-            }
-        }
-    }
-
-    private val showEvolution = object : BroadcastReceiver() {
-        override fun onReceive(context: Context?, intent: Intent?) {
-            if (intent?.action.toString() == Common.KEY_NUM_EVOLUTION) {
-                // Replace fragment
-                val detailFragment = PokemonDetailFragment.getInstance()
-                val num = intent?.getStringExtra("num")
-                val bundle = Bundle()
-                bundle.putString("num", num)
-                detailFragment.arguments = bundle
-
-                val fragmentTransaction = supportFragmentManager.beginTransaction()
-                fragmentTransaction.remove(detailFragment) // Remove current
-                fragmentTransaction.replace(R.id.fragment_container, detailFragment)
-                fragmentTransaction.addToBackStack("detail_pokemon")
-                fragmentTransaction.commit()
-            }
-        }
-    }
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -99,6 +63,43 @@ class MainActivity : AppCompatActivity() {
             mHandler.postDelayed(mRunnable, 0);
             stopwatchText?.text =
                 (String.format("%02d", minutes) + ":" + String.format("%02d", seconds) + ":" + String.format("%02d", milliSeconds));
+        }
+
+        // Create broadcast handle
+        val showDetail = object : ShowDetailReceiver() {
+            override fun onReceive(context: Context, intent: Intent) {
+                if (intent?.action.toString() == Common.KEY_ENABLE_HOME) {
+                    // Replace fragment
+                    val detailFragment = PokemonDetailFragment.getInstance()
+                    val position = intent?.getIntExtra("position", -1)
+                    val bundle = Bundle()
+                    bundle.putInt("position", position!!)
+                    detailFragment.arguments = bundle
+
+                    val fragmentTransaction = supportFragmentManager.beginTransaction()
+                    fragmentTransaction.replace(R.id.fragment_container, detailFragment)
+                    fragmentTransaction.addToBackStack("detail_pokemon")
+                    fragmentTransaction.commit()
+                }
+            }
+        }
+        val showEvolution = object : ShowEvolutionReceiver() {
+            override fun onReceive(context: Context, intent: Intent) {
+                if (intent?.action.toString() == Common.KEY_NUM_EVOLUTION) {
+                    // Replace fragment
+                    val detailFragment = PokemonDetailFragment.getInstance()
+                    val num = intent?.getStringExtra("num")
+                    val bundle = Bundle()
+                    bundle.putString("num", num)
+                    detailFragment.arguments = bundle
+
+                    val fragmentTransaction = supportFragmentManager.beginTransaction()
+                    fragmentTransaction.remove(detailFragment) // Remove current
+                    fragmentTransaction.replace(R.id.fragment_container, detailFragment)
+                    fragmentTransaction.addToBackStack("detail_pokemon")
+                    fragmentTransaction.commit()
+                }
+            }
         }
 
         // Register broadcast

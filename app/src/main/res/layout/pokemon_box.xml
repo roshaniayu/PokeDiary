@@ -87,7 +87,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textStyle="bold"
-            android:text="Training in Progress"
+            android:text="@string/training_pokemon"
             android:textSize="24sp"
             android:textColor="@android:color/white"/>
 
