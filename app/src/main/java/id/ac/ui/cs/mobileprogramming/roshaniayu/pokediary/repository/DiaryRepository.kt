@@ -27,7 +27,7 @@ class DiaryRepository private constructor(private val diaryDao: DiaryDao) {
 
     @ObsoleteCoroutinesApi
     fun deleteDiary(diary: DiaryEntity) = GlobalScope.launch(thread) {
-        diaryDao.delete(diary)
+        diaryDao.delete(diary.id)
     }
 
     companion object {
