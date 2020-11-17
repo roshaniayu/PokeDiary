@@ -34,7 +34,7 @@ class MainActivity : AppCompatActivity() {
     lateinit var mService: FetchService
     var mBound: Boolean = false
 
-    /** Defines callbacks for service binding, passed to bindService()  */
+    // Defines callbacks for service binding, passed to bindService()
     private val connection = object : ServiceConnection {
         override fun onServiceConnected(className: ComponentName, service: IBinder) {
             // We've bound to LocalService, cast the IBinder and get LocalService instance

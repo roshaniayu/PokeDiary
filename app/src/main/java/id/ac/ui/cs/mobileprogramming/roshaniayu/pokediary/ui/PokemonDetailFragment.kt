@@ -1,14 +1,15 @@
 package id.ac.ui.cs.mobileprogramming.roshaniayu.pokediary.ui
 
+import android.graphics.drawable.BitmapDrawable
+import android.graphics.drawable.Drawable
+import android.net.Uri
 import android.os.Bundle
-import androidx.fragment.app.Fragment
+import android.provider.MediaStore
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
-import android.widget.ImageView
-import android.widget.TextView
-import android.widget.Toast
+import android.widget.*
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -27,11 +28,6 @@ import id.ac.ui.cs.mobileprogramming.roshaniayu.pokediary.utils.InjectorUtils
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.coroutines.ObsoleteCoroutinesApi
 
-/**
- * A simple [Fragment] subclass.
- * Use the [PokemonDetailFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
 class PokemonDetailFragment : Fragment() {
     private lateinit var pokemonImage: ImageView
     private lateinit var pokemonName: TextView
@@ -39,6 +35,7 @@ class PokemonDetailFragment : Fragment() {
     private lateinit var pokemonWeight: TextView
     private lateinit var prevEmptyView: TextView
     private lateinit var nextEmptyView: TextView
+    private lateinit var saveImageButton: ImageButton
     private lateinit var catchPokemonButton: Button
     private lateinit var itemView: View
     private lateinit var viewModel: PokemonViewModel
@@ -69,6 +66,7 @@ class PokemonDetailFragment : Fragment() {
         pokemonWeight = itemView.findViewById(R.id.weight)
         prevEmptyView = itemView.findViewById(R.id.prev_evolution_empty)
         nextEmptyView = itemView.findViewById(R.id.next_evolution_empty)
+        saveImageButton = itemView.findViewById(R.id.save_image)
         catchPokemonButton = itemView.findViewById(R.id.catch_pokemon)
         catchPokemonButton.isEnabled = true
 
@@ -91,6 +89,23 @@ class PokemonDetailFragment : Fragment() {
         setDetailPokemon(pokemon!!)
 
         return itemView
+    }
+
+    // Method to save an image to gallery and return uri
+    private fun saveImage(drawable: Drawable, title:String): Uri {
+        // Get the bitmap from drawable object
+        val bitmap = (drawable as BitmapDrawable).bitmap
+
+        // Save image to gallery
+        val savedImageURL = MediaStore.Images.Media.insertImage(
+            activity?.contentResolver,
+            bitmap,
+            title,
+            "Image of $title"
+        )
+
+        // Parse the gallery image url to uri
+        return Uri.parse(savedImageURL)
     }
 
     @ObsoleteCoroutinesApi
@@ -134,6 +149,14 @@ class PokemonDetailFragment : Fragment() {
                 }
             }
         })
+
+        // Save pokemon image
+        saveImageButton.setOnClickListener{
+            // Get the image from drawable resource as drawable object
+            // Save the image to gallery and get saved image Uri
+            val uri = pokemon.name?.let { it1 -> saveImage(pokemonImage.drawable, it1) }
+            Toast.makeText(itemView.context, getString(R.string.image_saved) + " " + uri, Toast.LENGTH_SHORT).show()
+        }
 
         // Catch pokemon
         catchPokemonButton.setOnClickListener {

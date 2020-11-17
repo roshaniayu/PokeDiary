@@ -13,21 +13,14 @@ class DiaryContentProvider : ContentProvider() {
     companion object {
         private var diaryDao: DiaryDao? = null
 
-        /**
-         * Authority of this content provider
-         */
+        // Authority of this content provider
         const val AUTHORITY = "id.ac.ui.cs.mobileprogramming.roshaniayu.pokediary.provider"
-
         const val DIARY_TABLE_NAME = "diary"
 
-        /**
-         * The match code for some items in the Person table
-         */
+        // The match code for some items in the Person table
         const val ID_DIARY_DATA = 1
 
-        /**
-         * The match code for an item in the Person table
-         */
+        // The match code for an item in the Person table
         const val ID_DIARY_DATA_ITEM = 2
 
         var uriMatcher: UriMatcher? = null

@@ -35,4 +35,5 @@
     <string name="yes">Yes</string>
     <string name="no">Back</string>
     <string name="training_pokemon">Training in Progress</string>
+    <string name="image_saved">Saved at</string>
 </resources>

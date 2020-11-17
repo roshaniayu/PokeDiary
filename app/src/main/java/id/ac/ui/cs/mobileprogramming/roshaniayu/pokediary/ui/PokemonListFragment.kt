@@ -15,11 +15,6 @@ import id.ac.ui.cs.mobileprogramming.roshaniayu.pokediary.adapter.PokemonListAda
 import id.ac.ui.cs.mobileprogramming.roshaniayu.pokediary.common.ItemOffsetDecoration
 import kotlinx.android.synthetic.main.activity_main.*
 
-/**
- * A simple [Fragment] subclass.
- * Use the [PokemonListFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
 class PokemonListFragment : Fragment() {
     private lateinit var recyclerView: RecyclerView
 

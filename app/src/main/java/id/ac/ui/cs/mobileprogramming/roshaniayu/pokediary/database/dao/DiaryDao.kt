@@ -9,10 +9,6 @@ import id.ac.ui.cs.mobileprogramming.roshaniayu.pokediary.database.entity.DiaryE
 
 @Dao
 interface DiaryDao {
-    /**
-     * select all person
-     * @return A [Cursor] of all person in the table
-     */
     @Query("SELECT * FROM diary")
     fun getAllCursor(): Cursor?
 

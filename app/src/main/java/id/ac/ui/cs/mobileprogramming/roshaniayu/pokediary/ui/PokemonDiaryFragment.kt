@@ -27,11 +27,6 @@ import id.ac.ui.cs.mobileprogramming.roshaniayu.pokediary.ui.viewmodel.PokemonVi
 import id.ac.ui.cs.mobileprogramming.roshaniayu.pokediary.utils.InjectorUtils
 import kotlinx.android.synthetic.main.activity_main.*
 
-/**
- * A simple [Fragment] subclass.
- * Use the [PokemonDiaryFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
 class PokemonDiaryFragment : Fragment() {
     private lateinit var itemView: View
     private lateinit var viewModel: PokemonViewModel

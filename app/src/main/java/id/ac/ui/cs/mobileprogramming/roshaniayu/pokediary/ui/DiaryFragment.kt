@@ -27,11 +27,6 @@ import kotlinx.android.synthetic.main.activity_main.*
 import java.text.SimpleDateFormat
 import java.util.*
 
-/**
- * A simple [Fragment] subclass.
- * Use the [DiaryFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
 class DiaryFragment : Fragment() {
     private lateinit var itemView: View
     private lateinit var viewModel: DiaryViewModel

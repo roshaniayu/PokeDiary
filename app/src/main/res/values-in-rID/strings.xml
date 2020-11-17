@@ -32,4 +32,5 @@
     <string name="yes">Ya</string>
     <string name="no">Kembali</string>
     <string name="training_pokemon">Pelatihan sedang Berlangsung</string>
+    <string name="image_saved">Tersimpan di</string>
 </resources>
