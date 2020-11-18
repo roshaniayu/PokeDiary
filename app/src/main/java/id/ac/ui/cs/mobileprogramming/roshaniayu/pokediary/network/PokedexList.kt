@@ -1,6 +1,6 @@
 package id.ac.ui.cs.mobileprogramming.roshaniayu.pokediary.network
 
-import id.ac.ui.cs.mobileprogramming.roshaniayu.pokediary.model.PokemonResponse
+import id.ac.ui.cs.mobileprogramming.roshaniayu.pokediary.network.model.PokemonResponse
 import io.reactivex.Observable
 import retrofit2.http.GET
 

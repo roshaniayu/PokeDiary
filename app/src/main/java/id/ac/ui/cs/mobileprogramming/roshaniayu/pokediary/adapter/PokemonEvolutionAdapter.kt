@@ -10,7 +10,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.robertlevonyan.views.chip.Chip
 import id.ac.ui.cs.mobileprogramming.roshaniayu.pokediary.R
 import id.ac.ui.cs.mobileprogramming.roshaniayu.pokediary.common.Common
-import id.ac.ui.cs.mobileprogramming.roshaniayu.pokediary.model.Evolution
+import id.ac.ui.cs.mobileprogramming.roshaniayu.pokediary.network.model.Evolution
 
 class PokemonEvolutionAdapter(internal var context: Context, var evolutionList: List<Evolution>) : RecyclerView.Adapter<PokemonEvolutionAdapter.MyViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {

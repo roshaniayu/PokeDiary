@@ -6,7 +6,7 @@ import android.os.Binder
 import android.os.IBinder
 import androidx.lifecycle.MutableLiveData
 import id.ac.ui.cs.mobileprogramming.roshaniayu.pokediary.common.Common
-import id.ac.ui.cs.mobileprogramming.roshaniayu.pokediary.model.Pokemon
+import id.ac.ui.cs.mobileprogramming.roshaniayu.pokediary.network.model.Pokemon
 import id.ac.ui.cs.mobileprogramming.roshaniayu.pokediary.network.PokedexClient
 import id.ac.ui.cs.mobileprogramming.roshaniayu.pokediary.network.PokedexList
 import io.reactivex.android.schedulers.AndroidSchedulers

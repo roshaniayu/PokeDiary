@@ -1,7 +1,7 @@
 package id.ac.ui.cs.mobileprogramming.roshaniayu.pokediary.common
 
 import android.graphics.Color
-import id.ac.ui.cs.mobileprogramming.roshaniayu.pokediary.model.Pokemon
+import id.ac.ui.cs.mobileprogramming.roshaniayu.pokediary.network.model.Pokemon
 
 object Common {
     var pokemonList: List<Pokemon> = ArrayList()

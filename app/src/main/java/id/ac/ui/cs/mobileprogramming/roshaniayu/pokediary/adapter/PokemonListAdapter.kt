@@ -12,7 +12,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import id.ac.ui.cs.mobileprogramming.roshaniayu.pokediary.R
 import id.ac.ui.cs.mobileprogramming.roshaniayu.pokediary.common.Common
-import id.ac.ui.cs.mobileprogramming.roshaniayu.pokediary.model.Pokemon
+import id.ac.ui.cs.mobileprogramming.roshaniayu.pokediary.network.model.Pokemon
 
 class PokemonListAdapter(internal var context: Context, internal var pokemonList: List<Pokemon>)
     : RecyclerView.Adapter<PokemonListAdapter.MyViewHolder>() {

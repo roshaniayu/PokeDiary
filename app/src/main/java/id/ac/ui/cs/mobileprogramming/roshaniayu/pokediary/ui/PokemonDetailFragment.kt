@@ -22,7 +22,7 @@ import id.ac.ui.cs.mobileprogramming.roshaniayu.pokediary.adapter.PokemonTypeAda
 import id.ac.ui.cs.mobileprogramming.roshaniayu.pokediary.common.Common
 import id.ac.ui.cs.mobileprogramming.roshaniayu.pokediary.database.entity.PokeballEntity
 import id.ac.ui.cs.mobileprogramming.roshaniayu.pokediary.database.entity.PokemonEntity
-import id.ac.ui.cs.mobileprogramming.roshaniayu.pokediary.model.Pokemon
+import id.ac.ui.cs.mobileprogramming.roshaniayu.pokediary.network.model.Pokemon
 import id.ac.ui.cs.mobileprogramming.roshaniayu.pokediary.ui.viewmodel.PokemonViewModel
 import id.ac.ui.cs.mobileprogramming.roshaniayu.pokediary.utils.InjectorUtils
 import kotlinx.android.synthetic.main.activity_main.*

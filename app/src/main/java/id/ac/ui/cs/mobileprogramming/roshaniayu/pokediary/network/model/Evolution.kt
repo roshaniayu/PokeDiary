@@ -1,4 +1,4 @@
-package id.ac.ui.cs.mobileprogramming.roshaniayu.pokediary.model
+package id.ac.ui.cs.mobileprogramming.roshaniayu.pokediary.network.model
 
 class Evolution {
     var num:String? = null
