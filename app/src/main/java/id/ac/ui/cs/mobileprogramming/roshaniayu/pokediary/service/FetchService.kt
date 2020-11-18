@@ -8,7 +8,7 @@ import androidx.lifecycle.MutableLiveData
 import id.ac.ui.cs.mobileprogramming.roshaniayu.pokediary.common.Common
 import id.ac.ui.cs.mobileprogramming.roshaniayu.pokediary.model.Pokemon
 import id.ac.ui.cs.mobileprogramming.roshaniayu.pokediary.network.PokedexClient
-import id.ac.ui.cs.mobileprogramming.roshaniayu.pokediary.network.PokedexService
+import id.ac.ui.cs.mobileprogramming.roshaniayu.pokediary.network.PokedexList
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
@@ -16,17 +16,17 @@ import io.reactivex.schedulers.Schedulers
 class FetchService : Service() {
     var pokemonList = MutableLiveData<List<Pokemon>>()
     private var compositeDisposable = CompositeDisposable()
-    private var pokedexService: PokedexService
+    private var pokedexList: PokedexList
     // Binder given to clients
     private val binder = LocalBinder()
 
     init {
         val retrofit = PokedexClient.instance
-        pokedexService = retrofit.create(PokedexService::class.java)
+        pokedexList = retrofit.create(PokedexList::class.java)
     }
 
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
-        compositeDisposable.add(pokedexService.pokemonList
+        compositeDisposable.add(pokedexList.pokemonList
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe{ pokedex ->
@@ -49,7 +49,7 @@ class FetchService : Service() {
     }
 
     fun fetchData() {
-        compositeDisposable.add(pokedexService.pokemonList
+        compositeDisposable.add(pokedexList.pokemonList
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe{ pokedex ->

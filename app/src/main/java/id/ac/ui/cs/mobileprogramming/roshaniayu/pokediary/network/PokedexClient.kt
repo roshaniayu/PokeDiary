@@ -5,17 +5,17 @@ import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
 
 object PokedexClient {
-    private var pokedexService: Retrofit? = null
+    private var pokedexInstance: Retrofit? = null
     val instance: Retrofit
 
     get() {
-        if (pokedexService == null)
-            pokedexService = Retrofit.Builder()
+        if (pokedexInstance == null)
+            pokedexInstance = Retrofit.Builder()
                 .baseUrl("https://raw.githubusercontent.com/Biuni/PokemonGO-Pokedex/master/")
                 .addConverterFactory(GsonConverterFactory.create())
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .build()
 
-        return pokedexService!!
+        return pokedexInstance!!
     }
 }
