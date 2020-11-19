@@ -1,5 +1,6 @@
 package id.ac.ui.cs.mobileprogramming.roshaniayu.pokediary.ui
 
+import android.content.pm.PackageManager
 import android.graphics.drawable.BitmapDrawable
 import android.graphics.drawable.Drawable
 import android.net.Uri
@@ -9,6 +10,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
+import androidx.core.app.ActivityCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
@@ -154,8 +156,16 @@ class PokemonDetailFragment : Fragment() {
         saveImageButton.setOnClickListener{
             // Get the image from drawable resource as drawable object
             // Save the image to gallery and get saved image Uri
-            val uri = pokemon.name?.let { it1 -> saveImage(pokemonImage.drawable, it1) }
-            Toast.makeText(itemView.context, getString(R.string.image_saved) + " " + uri, Toast.LENGTH_SHORT).show()
+            if (activity?.let { ActivityCompat.checkSelfPermission(it,android.Manifest.permission.WRITE_EXTERNAL_STORAGE) } != PackageManager.PERMISSION_GRANTED) {
+                activity?.let {
+                    ActivityCompat.requestPermissions(
+                        it,arrayOf(android.Manifest.permission.WRITE_EXTERNAL_STORAGE)
+                        , 1001)
+                }
+            } else {
+                val uri = pokemon.name?.let { it1 -> saveImage(pokemonImage.drawable, it1) }
+                Toast.makeText(itemView.context, getString(R.string.image_saved) + " " + uri, Toast.LENGTH_SHORT).show()
+            }
         }
 
         // Catch pokemon
