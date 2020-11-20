@@ -49,7 +49,7 @@ class PokemonListFragment : Fragment() {
             (activity as MainActivity).mService.fetchData()
             (activity as MainActivity).mService.pokemonList.observe(
                 this, Observer { listPokemon ->
-                    val adapter = PokemonListAdapter( activity!!, listPokemon)
+                    val adapter = PokemonListAdapter(activity as MainActivity, listPokemon)
                     recyclerView.adapter = adapter
             })
         }
