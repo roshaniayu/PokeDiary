@@ -1,5 +1,6 @@
 package id.ac.ui.cs.mobileprogramming.roshaniayu.pokediary.ui
 
+import android.Manifest
 import android.content.pm.PackageManager
 import android.graphics.drawable.BitmapDrawable
 import android.graphics.drawable.Drawable
@@ -29,6 +30,7 @@ import id.ac.ui.cs.mobileprogramming.roshaniayu.pokediary.ui.viewmodel.PokemonVi
 import id.ac.ui.cs.mobileprogramming.roshaniayu.pokediary.utils.InjectorUtils
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.coroutines.ObsoleteCoroutinesApi
+
 
 class PokemonDetailFragment : Fragment() {
     private lateinit var pokemonImage: ImageView
@@ -91,6 +93,20 @@ class PokemonDetailFragment : Fragment() {
         setDetailPokemon(pokemon!!)
 
         return itemView
+    }
+
+    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+        when (requestCode) {
+            1001 -> {
+                if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    val uri = pokemonName.text ?.let { it -> saveImage(pokemonImage.drawable,
+                        it as String
+                    ) }
+                    Toast.makeText(itemView.context, getString(R.string.image_saved) + " " + uri, Toast.LENGTH_SHORT).show()
+                }
+            }
+        }
     }
 
     // Method to save an image to gallery and return uri
@@ -156,11 +172,12 @@ class PokemonDetailFragment : Fragment() {
         saveImageButton.setOnClickListener{
             // Get the image from drawable resource as drawable object
             // Save the image to gallery and get saved image Uri
-            if (activity?.let { ActivityCompat.checkSelfPermission(it,android.Manifest.permission.WRITE_EXTERNAL_STORAGE) } != PackageManager.PERMISSION_GRANTED) {
+            if (activity?.let { ActivityCompat.checkSelfPermission(it,Manifest.permission.WRITE_EXTERNAL_STORAGE) } != PackageManager.PERMISSION_GRANTED) {
                 activity?.let {
-                    ActivityCompat.requestPermissions(
-                        it,arrayOf(android.Manifest.permission.WRITE_EXTERNAL_STORAGE)
-                        , 1001)
+                    requestPermissions(
+                        arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE),
+                        1001
+                    )
                 }
             } else {
                 val uri = pokemon.name?.let { it1 -> saveImage(pokemonImage.drawable, it1) }
