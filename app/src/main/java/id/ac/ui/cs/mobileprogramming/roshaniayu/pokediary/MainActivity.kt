@@ -68,12 +68,12 @@ class MainActivity : AppCompatActivity() {
         // Create broadcast handle
         val showDetail = object : ShowDetailReceiver() {
             override fun onReceive(context: Context, intent: Intent) {
-                if (intent?.action.toString() == Common.KEY_ENABLE_HOME) {
+                if (intent.action.toString() == Common.KEY_ENABLE_HOME) {
                     // Replace fragment
                     val detailFragment = PokemonDetailFragment.getInstance()
-                    val position = intent?.getIntExtra("position", -1)
+                    val position = intent.getIntExtra("position", -1)
                     val bundle = Bundle()
-                    bundle.putInt("position", position!!)
+                    bundle.putInt("position", position)
                     detailFragment.arguments = bundle
 
                     val fragmentTransaction = supportFragmentManager.beginTransaction()
@@ -85,10 +85,10 @@ class MainActivity : AppCompatActivity() {
         }
         val showEvolution = object : ShowEvolutionReceiver() {
             override fun onReceive(context: Context, intent: Intent) {
-                if (intent?.action.toString() == Common.KEY_NUM_EVOLUTION) {
+                if (intent.action.toString() == Common.KEY_NUM_EVOLUTION) {
                     // Replace fragment
                     val detailFragment = PokemonDetailFragment.getInstance()
-                    val num = intent?.getStringExtra("num")
+                    val num = intent.getStringExtra("num")
                     val bundle = Bundle()
                     bundle.putString("num", num)
                     detailFragment.arguments = bundle
