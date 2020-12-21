@@ -34,6 +34,13 @@ class MainActivity : AppCompatActivity() {
     lateinit var mService: FetchService
     var mBound: Boolean = false
 
+    companion object {
+        // Used to load the 'native-lib' library on application startup.
+        init {
+            System.loadLibrary("native-lib")
+        }
+    }
+
     // Defines callbacks for service binding, passed to bindService()
     private val connection = object : ServiceConnection {
         override fun onServiceConnected(className: ComponentName, service: IBinder) {
@@ -178,4 +185,6 @@ class MainActivity : AppCompatActivity() {
         minutes = 0
         milliSeconds = 0
     }
+
+    external fun increaseLevel(level: Int): Int
 }

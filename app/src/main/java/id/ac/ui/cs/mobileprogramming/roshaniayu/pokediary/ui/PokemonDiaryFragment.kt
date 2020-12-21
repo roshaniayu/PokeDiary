@@ -122,7 +122,7 @@ class PokemonDiaryFragment : Fragment() {
             }
 
             override fun onFinish() {
-                pokemon.level += 1
+                pokemon.level = (activity as MainActivity).increaseLevel(pokemon.level)
                 viewModel.updatePokemon(pokemon)
                 releaseButton.isEnabled = true
                 trainButton.isEnabled = true
