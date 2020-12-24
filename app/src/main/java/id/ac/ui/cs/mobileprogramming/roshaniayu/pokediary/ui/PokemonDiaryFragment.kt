@@ -4,7 +4,6 @@ import android.app.AlertDialog
 import android.content.DialogInterface
 import android.graphics.Color
 import android.os.Bundle
-import android.os.CountDownTimer
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -116,19 +115,7 @@ class PokemonDiaryFragment : Fragment() {
         trainButton.isEnabled = false
         disabledCard.visibility = View.VISIBLE
 
-        object : CountDownTimer((10000 * pokemon.level).toLong(), 1000) {
-            override fun onTick(millisUntilFinish: Long) {
-                trainingTimer.text = (millisUntilFinish / 1000).toString()
-            }
-
-            override fun onFinish() {
-                pokemon.level = (activity as MainActivity).increaseLevel(pokemon.level)
-                viewModel.updatePokemon(pokemon)
-                releaseButton.isEnabled = true
-                trainButton.isEnabled = true
-                disabledCard.visibility = View.GONE
-            }
-        }.start()
+        (activity as MainActivity).startTraining(pokemon, trainingTimer, viewModel, releaseButton, trainButton, disabledCard)
     }
 
     private fun showPokeBoxRecyclerList() {
