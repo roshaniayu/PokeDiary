@@ -11,6 +11,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
+import androidx.appcompat.app.AlertDialog
 import androidx.core.app.ActivityCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
@@ -104,6 +105,11 @@ class PokemonDetailFragment : Fragment() {
                         it as String
                     ) }
                     Toast.makeText(itemView.context, getString(R.string.image_saved) + " " + uri, Toast.LENGTH_SHORT).show()
+                } else {
+                    AlertDialog.Builder(itemView.context, R.style.AlertDialogCustom)
+                        .setMessage("You need to have an access to photos and media on your device in order to save the pokemon image")
+                        .setPositiveButton("OK") { _, _ -> }
+                        .show()
                 }
             }
         }
